@@ -26,7 +26,7 @@ namespace SeleniumWebAutomation
          _logger.Info("Starting... SeleniumWebAutomation");
          _logger.Info($"Version: {Assembly.GetExecutingAssembly().GetName()}");
 
-         TestGoogle testExample = new TestGoogle();
+         TestActions testExample = new TestActions();
          testExample.BaseSetUp();
          testExample.RunGoogleTest();
          testExample.BaseTearDown();

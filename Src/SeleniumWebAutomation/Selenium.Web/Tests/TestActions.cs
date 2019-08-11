@@ -13,9 +13,9 @@ using Selenium.Web.Model.Page;
 namespace Selenium.Web.Tests
 {
    [TestFixture]
-   public class TestGoogle : BaseTestClass
+   public class TestActions : BaseTestClass
    {
-      private static readonly ILog _logger = LogManager.GetLogger(typeof(TestGoogle));
+      private static readonly ILog _logger = LogManager.GetLogger(typeof(TestActions));
 
       [SetUp]
       public void DerivedSetUp() { }

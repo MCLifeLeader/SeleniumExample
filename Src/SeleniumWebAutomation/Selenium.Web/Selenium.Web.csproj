@@ -68,7 +68,7 @@
     <Compile Include="Model\Page\MbCareyQa.cs" />
     <Compile Include="Model\Page\MbCareyTechnologies.cs" />
     <Compile Include="Model\UserContext.cs" />
-    <Compile Include="Tests\TestGoogle.cs" />
+    <Compile Include="Tests\TestActions.cs" />
     <Compile Include="WebDriverConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
