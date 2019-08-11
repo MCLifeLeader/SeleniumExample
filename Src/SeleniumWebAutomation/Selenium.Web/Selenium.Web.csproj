@@ -65,6 +65,8 @@
     <Compile Include="Model\Enum\TestDriverType.cs" />
     <Compile Include="Model\Page\GoogleHome.cs" />
     <Compile Include="Model\Page\GoogleSearchResults.cs" />
+    <Compile Include="Model\Page\MbCareyQa.cs" />
+    <Compile Include="Model\Page\MbCareyTechnologies.cs" />
     <Compile Include="Model\UserContext.cs" />
     <Compile Include="Tests\TestGoogle.cs" />
     <Compile Include="WebDriverConfig.cs" />

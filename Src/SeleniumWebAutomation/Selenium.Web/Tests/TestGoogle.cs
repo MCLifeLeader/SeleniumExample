@@ -29,18 +29,21 @@ namespace Selenium.Web.Tests
          _logger.DebugFormat($"'{GetType().Name}.{MethodBase.GetCurrentMethod().Name}' called");
 
          WebDriverConfig.Driver.Navigate().GoToUrl(WebDriverConfig.ServiceEndPoint);
-         GoogleHome.SearchForm.Set("world of warcraft");
+         GoogleHome.SearchForm.Set("mbcarey.com Michael Carey Technology");
          GoogleHome.SearchForm.SendKeys(Keys.Return);
 
-         IWebElement results = GoogleSearchResults.SearchResults.FindByTextContains("Wikipedia");
+         IWebElement result = GoogleSearchResults.SearchResults.FindByTextContains("Development Technologies");
+         Assert.IsTrue(result.Text.Contains("Development Technologies"));
 
-         Assert.IsTrue(results.Text.Contains("Wikipedia"));
+         result = GoogleSearchResults.SearchHrefResults.FindByTextContains("Technologies");
+         result.Click();
 
-         GoogleSearchResults.SearchForm.Set("Blizzard");
-         GoogleSearchResults.SearchFormBtn.Click();
+         Assert.IsTrue(MbCareyTechnologies.MainPageText.Displayed);
+         MbCareyTechnologies.QualityAssuranceLink.Click();
 
-         results = GoogleSearchResults.SearchResults.FindByTextContains("Blizzard Entertainment");
-         Assert.IsTrue(results.Text.Contains("Entertainment"));
+         Assert.IsTrue(MbCareyQa.MainPageText.Displayed);
+
+         WebDriverConfig.WaitTill(new TimeSpan(0,0,0,5));
       }
    }
 }

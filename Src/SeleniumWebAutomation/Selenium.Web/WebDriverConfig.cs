@@ -56,6 +56,7 @@ namespace Selenium.Web
       /// The wait10.
       /// </value>
       public static WebDriverWait Wait10 { get; set; }
+
       /// <summary>
       /// Gets or sets the wait30.
       /// </summary>
@@ -83,6 +84,18 @@ namespace Selenium.Web
          }
       }
 
+      public static void WaitTill(TimeSpan timeSpan)
+      {
+         Stopwatch stopWatch = new Stopwatch();
+         stopWatch.Start();
+
+         while (true)
+         {
+            if (stopWatch.Elapsed.Seconds > timeSpan.Seconds)
+               return;
+         }
+      }
+
       public static IWebElement Element(string by)
       {
          return Element(by, 10);
@@ -90,8 +103,12 @@ namespace Selenium.Web
 
       public static IWebElement Element(string by, int maxWaitSec)
       {
-
          return WaitBySeconds(maxWaitSec).Until(driver => Driver.FindElement(GetBy(by)));
+      }
+
+      public static IWebElement Element(IWebElement element, int maxWaitSec)
+      {
+         return WaitBySeconds(maxWaitSec).Until(driver => element);
       }
 
       public static IWebElement Element(By by)
