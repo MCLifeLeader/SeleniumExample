@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using log4net;
 using NUnit.Framework;
 using OpenQA.Selenium.Chrome;
@@ -11,6 +7,7 @@ using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Support.UI;
+using Selenium.Config;
 using Selenium.Web.Model;
 using Selenium.Web.Model.Enum;
 
@@ -29,7 +26,8 @@ namespace Selenium.Web
       {
          _logger.DebugFormat($"'{GetType().Name}.{MethodBase.GetCurrentMethod().Name}' called");
 
-         WebDriverConfig.ServiceEndPoint = "https://www.google.com";
+         WebDriverConfig.ServiceEndPoint = Settings.Default.WebUrl;
+
          WebDriverConfig.UserContext = new UserContext
          {
             UserName = "",
@@ -78,7 +76,7 @@ namespace Selenium.Web
       {
          _logger.DebugFormat($"'{GetType().Name}.{MethodBase.GetCurrentMethod().Name}' called");
 
-         //WebDriverConfig.Driver.Close();
+         // Close out the browser session
          WebDriverConfig.Driver.Quit();
       }
    }
