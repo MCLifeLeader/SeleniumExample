@@ -7,7 +7,6 @@ using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Support.UI;
-using Selenium.Config;
 using Selenium.Web.Model;
 using Selenium.Web.Model.Enum;
 
@@ -22,17 +21,13 @@ namespace Selenium.Web
       public static TimeSpan SetScriptTimeout { get; set; } = new TimeSpan(0, 0, 0, 120);
 
       [SetUp]
-      public void BaseSetUp()
+      public void BaseSetUp(string serviceEndPoint, UserContext userContext = null)
       {
          _logger.DebugFormat($"'{GetType().Name}.{MethodBase.GetCurrentMethod().Name}' called");
 
-         WebDriverConfig.ServiceEndPoint = Settings.Default.WebUrl;
+         WebDriverConfig.ServiceEndPoint = serviceEndPoint;
 
-         WebDriverConfig.UserContext = new UserContext
-         {
-            UserName = "",
-            Password = "",
-         };
+         WebDriverConfig.UserContext = userContext;
 
          TestDriverType driverType = TestDriverType.FireFox;
 

@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 
-namespace Selenium.Web.Model.Page
+namespace Selenium.Web.Model.Page.Google
 {
    public class GoogleHome : WebDriverConfig
    {

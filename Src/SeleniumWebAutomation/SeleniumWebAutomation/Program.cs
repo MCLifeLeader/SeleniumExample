@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using log4net;
+using Selenium.Config;
 using Selenium.Web.Tests;
 
 namespace SeleniumWebAutomation
@@ -22,8 +23,8 @@ namespace SeleniumWebAutomation
          _logger.Info("Starting... SeleniumWebAutomation");
          _logger.Info($"Version: {Assembly.GetExecutingAssembly().GetName()}");
 
-         TestActions testExample = new TestActions();
-         testExample.BaseSetUp();
+         TestGoogle testExample = new TestGoogle();
+         testExample.BaseSetUp(Settings.Default.WebUrlGoogle);
          testExample.RunGoogleTest();
          testExample.BaseTearDown();
 

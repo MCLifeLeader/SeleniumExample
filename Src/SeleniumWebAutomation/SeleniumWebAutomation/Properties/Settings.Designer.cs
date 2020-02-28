@@ -26,9 +26,18 @@ namespace Selenium.Config {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("https://www.google.com")]
-        public string WebUrl {
+        public string WebUrlGoogle {
             get {
-                return ((string)(this["WebUrl"]));
+                return ((string)(this["WebUrlGoogle"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://www.mbcarey.com")]
+        public string WebUrlMbCarey {
+            get {
+                return ((string)(this["WebUrlMbCarey"]));
             }
         }
     }

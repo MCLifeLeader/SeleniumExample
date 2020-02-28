@@ -1,17 +1,20 @@
 ﻿using System;
+using System.Data;
 using System.Reflection;
 using log4net;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using Selenium.Web.Extensions;
 using Selenium.Web.Model.Page;
+using Selenium.Web.Model.Page.Google;
+using Selenium.Web.Model.Page.MbCarey;
 
 namespace Selenium.Web.Tests
 {
    [TestFixture]
-   public class TestActions : BaseTestClass
+   public class TestGoogle : BaseTestClass
    {
-      private static readonly ILog _logger = LogManager.GetLogger(typeof(TestActions));
+      private static readonly ILog _logger = LogManager.GetLogger(typeof(TestGoogle));
 
       [SetUp]
       public void DerivedSetUp() { }
@@ -23,6 +26,11 @@ namespace Selenium.Web.Tests
       public void RunGoogleTest()
       {
          _logger.DebugFormat($"'{GetType().Name}.{MethodBase.GetCurrentMethod().Name}' called");
+
+         if (string.IsNullOrEmpty(WebDriverConfig.ServiceEndPoint))
+         {
+            throw new NoNullAllowedException($"{nameof(WebDriverConfig.ServiceEndPoint)} cannot be null.");
+         }
 
          WebDriverConfig.Driver.Navigate().GoToUrl(WebDriverConfig.ServiceEndPoint);
          GoogleHome.SearchForm.Set("mbcarey.com Michael Carey Technology");

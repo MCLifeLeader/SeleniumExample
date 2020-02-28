@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using OpenQA.Selenium;
 
-namespace Selenium.Web.Model.Page
+namespace Selenium.Web.Model.Page.MbCarey
 {
    public class MbCareyTechnologies : WebDriverConfig
    {
