@@ -64,10 +64,10 @@
     <Compile Include="BaseTestClass.cs" />
     <Compile Include="Extensions\WebElement.cs" />
     <Compile Include="Model\Enum\TestDriverType.cs" />
-    <Compile Include="Model\Page\GoogleHome.cs" />
-    <Compile Include="Model\Page\GoogleSearchResults.cs" />
-    <Compile Include="Model\Page\MbCareyQa.cs" />
-    <Compile Include="Model\Page\MbCareyTechnologies.cs" />
+    <Compile Include="Model\Page\Google\Home.cs" />
+    <Compile Include="Model\Page\Google\SearchResults.cs" />
+    <Compile Include="Model\Page\MbCarey\Qa.cs" />
+    <Compile Include="Model\Page\MbCarey\Technologies.cs" />
     <Compile Include="Model\UserContext.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -97,10 +97,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\Page\Google\" />
-    <Folder Include="Model\Page\MbCarey\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.VisualStudio.SlowCheetah.3.2.26\build\Microsoft.VisualStudio.SlowCheetah.targets" Condition="Exists('..\packages\Microsoft.VisualStudio.SlowCheetah.3.2.26\build\Microsoft.VisualStudio.SlowCheetah.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
