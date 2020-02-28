@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using log4net;
 using NUnit.Framework;
 using Selenium.Web.Model.Page.MbCarey;
@@ -18,7 +14,15 @@ namespace Selenium.Web.Tests
       private static readonly ILog _logger = LogManager.GetLogger(typeof(TestMbCarey));
 
       [SetUp]
-      public void DerivedSetUp() { }
+      public void DerivedSetUp()
+      {
+         if (string.IsNullOrEmpty(WebDriverConfig.ServiceEndPoint))
+         {
+            throw new NoNullAllowedException($"{nameof(WebDriverConfig.ServiceEndPoint)} cannot be null.");
+         }
+
+         WebDriverConfig.Driver.Navigate().GoToUrl(WebDriverConfig.ServiceEndPoint);
+      }
 
       [TearDown]
       public void DerivedTearDown() { }
@@ -28,12 +32,7 @@ namespace Selenium.Web.Tests
       {
          _logger.DebugFormat($"'{GetType().Name}.{MethodBase.GetCurrentMethod().Name}' called");
 
-         if (string.IsNullOrEmpty(WebDriverConfig.ServiceEndPoint))
-         {
-            throw new NoNullAllowedException($"{nameof(WebDriverConfig.ServiceEndPoint)} cannot be null.");
-         }
-
-         WebDriverConfig.Driver.Navigate().GoToUrl(WebDriverConfig.ServiceEndPoint);
+         DerivedSetUp();
 
          Home.ResumeLink.Click();
          WebDriverConfig.CloseWindowByUrlOrHandle(WebDriverConfig.Driver.CurrentWindowHandle, "Computer programmer", TimeSpan.FromSeconds(5));
@@ -74,15 +73,8 @@ namespace Selenium.Web.Tests
       {
          _logger.DebugFormat($"'{GetType().Name}.{MethodBase.GetCurrentMethod().Name}' called");
 
-         if (string.IsNullOrEmpty(WebDriverConfig.ServiceEndPoint))
-         {
-            throw new NoNullAllowedException($"{nameof(WebDriverConfig.ServiceEndPoint)} cannot be null.");
-         }
+         DerivedSetUp();
 
-         WebDriverConfig.Driver.Navigate().GoToUrl(WebDriverConfig.ServiceEndPoint);
-
-         Navigation.TopSiteHomeLink.Click();
-         
          Navigation.TopExperienceLink.Click();
          Navigation.TopWorkHistoryLink.Click();
 

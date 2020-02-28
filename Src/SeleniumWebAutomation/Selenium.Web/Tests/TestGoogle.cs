@@ -17,7 +17,15 @@ namespace Selenium.Web.Tests
       private static readonly ILog _logger = LogManager.GetLogger(typeof(TestGoogle));
 
       [SetUp]
-      public void DerivedSetUp() { }
+      public void DerivedSetUp()
+      {
+         if (string.IsNullOrEmpty(WebDriverConfig.ServiceEndPoint))
+         {
+            throw new NoNullAllowedException($"{nameof(WebDriverConfig.ServiceEndPoint)} cannot be null.");
+         }
+
+         WebDriverConfig.Driver.Navigate().GoToUrl(WebDriverConfig.ServiceEndPoint);
+      }
 
       [TearDown]
       public void DerivedTearDown() { }
@@ -27,12 +35,8 @@ namespace Selenium.Web.Tests
       {
          _logger.DebugFormat($"'{GetType().Name}.{MethodBase.GetCurrentMethod().Name}' called");
 
-         if (string.IsNullOrEmpty(WebDriverConfig.ServiceEndPoint))
-         {
-            throw new NoNullAllowedException($"{nameof(WebDriverConfig.ServiceEndPoint)} cannot be null.");
-         }
+         DerivedSetUp();
 
-         WebDriverConfig.Driver.Navigate().GoToUrl(WebDriverConfig.ServiceEndPoint);
          GoogleHome.SearchForm.Set("mbcarey.com Michael Carey Technology");
          GoogleHome.SearchForm.SendKeys(Keys.Return);
 

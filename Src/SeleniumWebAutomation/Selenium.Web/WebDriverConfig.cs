@@ -148,8 +148,6 @@ namespace Selenium.Web
                return true;
             }
 
-            string handleToClose;
-
             foreach (string handle in Driver.WindowHandles)
             {
                Driver.SwitchTo().Window(handle);
