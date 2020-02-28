@@ -5,9 +5,9 @@ namespace Selenium.Web.Model.Page
 {
    public class GoogleSearchResults : WebDriverConfig
    {
-      public static IWebElement SearchForm => Driver.FindElement(By.XPath("//*[@id=\"tsf\"]/div[2]/div/div[2]/div/div[1]/input"));
+      public static IWebElement SearchForm => Driver.FindElement(By.XPath("/html/body/div[3]/form/div[2]/div[1]/div[2]/div/div[2]/input"));
 
-      public static IWebElement SearchFormBtn => Driver.FindElement(By.XPath("//*[@id=\"tsf\"]/div[2]/div/div[2]/button"));
+      public static IWebElement SearchFormBtn => Driver.FindElement(By.XPath("/html/body/div[3]/form/div[2]/div[1]/div[2]/button"));
 
       public static ReadOnlyCollection<IWebElement> SearchResults => Driver.FindElements(By.ClassName("rc"));
 
