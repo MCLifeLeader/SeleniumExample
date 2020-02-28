@@ -5,7 +5,6 @@ using log4net;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using Selenium.Web.Extensions;
-using Selenium.Web.Model.Page;
 using Selenium.Web.Model.Page.Google;
 using Selenium.Web.Model.Page.MbCarey;
 
@@ -14,6 +13,7 @@ namespace Selenium.Web.Tests
    [TestFixture]
    public class TestGoogle : BaseTestClass
    {
+      // ReSharper disable once InconsistentNaming
       private static readonly ILog _logger = LogManager.GetLogger(typeof(TestGoogle));
 
       [SetUp]
@@ -42,10 +42,10 @@ namespace Selenium.Web.Tests
          result = GoogleSearchResults.SearchHrefResults.FindByTextContains("Technologies");
          result.Click();
 
-         Assert.IsTrue(MbCareyTechnologies.MainPageText.Displayed);
-         MbCareyTechnologies.QualityAssuranceLink.Click();
+         Assert.IsTrue(Technologies.MainPageText.Displayed);
+         Technologies.QualityAssuranceLink.Click();
 
-         Assert.IsTrue(MbCareyQa.MainPageText.Displayed);
+         Assert.IsTrue(Qa.MainPageText.Displayed);
 
          WebDriverConfig.WaitTill(new TimeSpan(0,0,0,5));
       }

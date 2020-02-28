@@ -2,7 +2,7 @@
 
 namespace Selenium.Web.Model.Page.MbCarey
 {
-   public class MbCareyQa : WebDriverConfig
+   public class Qa : Navigation
    {
       public static IWebElement MainPageText => Driver.FindElement(By.XPath("/html/body/div[1]/partial/main/h2"));
    }

@@ -14,6 +14,7 @@ namespace Selenium.Web
 {
    public class BaseTestClass
    {
+      // ReSharper disable once InconsistentNaming
       private static readonly ILog _logger = LogManager.GetLogger(typeof(BaseTestClass));
 
       public static TimeSpan ImplicitlyWait { get; set; } = new TimeSpan(0, 0, 0, 15);
@@ -26,7 +27,6 @@ namespace Selenium.Web
          _logger.DebugFormat($"'{GetType().Name}.{MethodBase.GetCurrentMethod().Name}' called");
 
          WebDriverConfig.ServiceEndPoint = serviceEndPoint;
-
          WebDriverConfig.UserContext = userContext;
 
          TestDriverType driverType = TestDriverType.FireFox;

@@ -132,7 +132,7 @@ namespace Selenium.Web
       /// <param name="timeSpan">The time span.</param>
       /// <param name="byHandle">if set to <c>true</c> [by handle].</param>
       /// <returns>true if closed, false if nothing found or closed</returns>
-      public static bool CloseWindowByUrlOrHandle(string urlOrHandle, TimeSpan timeSpan, bool byHandle = false)
+      public static bool CloseWindowByUrlOrHandle(string currentHandle, string urlOrHandle, TimeSpan timeSpan, bool byHandle = false)
       {
          Stopwatch stopWatch = new Stopwatch();
          stopWatch.Start();
@@ -143,18 +143,21 @@ namespace Selenium.Web
             {
                Driver.SwitchTo().Window(urlOrHandle);
                Driver.Close();
+               Driver.SwitchTo().Window(currentHandle);
 
                return true;
             }
+
+            string handleToClose;
 
             foreach (string handle in Driver.WindowHandles)
             {
                Driver.SwitchTo().Window(handle);
 
-               if (Driver.Url.Contains(urlOrHandle))
+               if (Driver.Url.Contains(urlOrHandle) || Driver.Title.Contains(urlOrHandle))
                {
                   Driver.Close();
-
+                  Driver.SwitchTo().Window(currentHandle);
                   return true;
                }
 

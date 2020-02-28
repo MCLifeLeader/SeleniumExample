@@ -10,6 +10,7 @@ namespace SeleniumWebAutomation
 {
    class Program
    {
+      // ReSharper disable once InconsistentNaming
       private static readonly ILog _logger = LogManager.GetLogger(typeof(Program));
 
       static void Main(string[] args)
@@ -23,10 +24,19 @@ namespace SeleniumWebAutomation
          _logger.Info("Starting... SeleniumWebAutomation");
          _logger.Info($"Version: {Assembly.GetExecutingAssembly().GetName()}");
 
-         TestGoogle testExample = new TestGoogle();
-         testExample.BaseSetUp(Settings.Default.WebUrlGoogle);
-         testExample.RunGoogleTest();
-         testExample.BaseTearDown();
+         //TestGoogle googleTests = new TestGoogle();
+         //googleTests.BaseSetUp(Settings.Default.WebUrlGoogle);
+         //googleTests.RunGoogleTest();
+         //googleTests.BaseTearDown();
+
+         TestMbCarey mbcareyTests = new TestMbCarey();
+         mbcareyTests.BaseSetUp(Settings.Default.WebUrlMbCarey);
+         mbcareyTests.HomePage();
+         mbcareyTests.MenuNavigation();
+         //mbcareyTests.ExperiencePage();
+         //mbcareyTests.ProjectsPage();
+         //mbcareyTests.SkillsPage();
+         mbcareyTests.BaseTearDown();
 
          timer.Stop();
          _logger.Info($"Ending... SeleniumWebAutomation - Elapsed Time = {timer.Elapsed}");

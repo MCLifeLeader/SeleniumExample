@@ -3,7 +3,7 @@ using OpenQA.Selenium;
 
 namespace Selenium.Web.Model.Page.MbCarey
 {
-   public class MbCareyTechnologies : WebDriverConfig
+   public class Technologies : Navigation
    {
       public static IWebElement MainPageText => Driver.FindElement(By.XPath("/html/body/div[1]/partial/main/h2"));
       public static ReadOnlyCollection<IWebElement> HyperLinkList => Driver.FindElements(By.TagName("a"));
