@@ -7,6 +7,7 @@ using OpenQA.Selenium;
 using Selenium.Web.Extensions;
 using Selenium.Web.Model.Page.Google;
 using Selenium.Web.Model.Page.MbCarey;
+using Home = Selenium.Web.Model.Page.Google.Home;
 
 namespace Selenium.Web.Tests
 {
@@ -37,13 +38,13 @@ namespace Selenium.Web.Tests
 
          DerivedSetUp();
 
-         GoogleHome.SearchForm.Set("mbcarey.com Michael Carey Technology");
-         GoogleHome.SearchForm.SendKeys(Keys.Return);
+         Home.SearchForm.Set("mbcarey.com Michael Carey Technology");
+         Home.SearchForm.SendKeys(Keys.Return);
 
-         IWebElement result = GoogleSearchResults.SearchResults.FindByTextContains("Development Technologies");
+         IWebElement result = SearchResults.SearchResultsCollection.FindByTextContains("Development Technologies");
          Assert.IsTrue(result.Text.Contains("Development Technologies"));
 
-         result = GoogleSearchResults.SearchHrefResults.FindByTextContains("Technologies");
+         result = SearchResults.SearchHrefResultsCollection.FindByTextContains("Technologies");
          result.Click();
 
          Assert.IsTrue(Technologies.MainPageText.Displayed);

@@ -2,7 +2,7 @@
 
 namespace Selenium.Web.Model.Page.Google
 {
-   public class GoogleHome : WebDriverConfig
+   public class Home : WebDriverConfig
    {
       public static IWebElement GoogleLogo => Driver.FindElement(By.Id("hplogo"));
 
