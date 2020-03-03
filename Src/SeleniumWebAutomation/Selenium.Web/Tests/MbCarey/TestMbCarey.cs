@@ -5,7 +5,7 @@ using log4net;
 using NUnit.Framework;
 using Selenium.Web.Model.Page.MbCarey;
 
-namespace Selenium.Web.Tests
+namespace Selenium.Web.Tests.MbCarey
 {
    [TestFixture]
    public class TestMbCarey : BaseTestClass

@@ -76,8 +76,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Tests\TestGoogle.cs" />
-    <Compile Include="Tests\TestMbCarey.cs" />
+    <Compile Include="Tests\Google\TestGoogle.cs" />
+    <Compile Include="Tests\MbCarey\TestMbCarey.cs" />
     <Compile Include="WebDriverConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

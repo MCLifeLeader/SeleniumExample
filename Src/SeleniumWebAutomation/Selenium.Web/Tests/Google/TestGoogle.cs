@@ -9,7 +9,7 @@ using Selenium.Web.Model.Page.Google;
 using Selenium.Web.Model.Page.MbCarey;
 using Home = Selenium.Web.Model.Page.Google.Home;
 
-namespace Selenium.Web.Tests
+namespace Selenium.Web.Tests.Google
 {
    [TestFixture]
    public class TestGoogle : BaseTestClass

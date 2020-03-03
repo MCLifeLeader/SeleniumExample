@@ -5,6 +5,7 @@ using System.Reflection;
 using log4net;
 using Selenium.Config;
 using Selenium.Web.Tests;
+using Selenium.Web.Tests.MbCarey;
 
 namespace SeleniumWebAutomation
 {

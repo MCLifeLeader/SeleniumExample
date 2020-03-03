@@ -12,5 +12,8 @@ namespace Selenium.Web.Model.Page.Google
       public static ReadOnlyCollection<IWebElement> SearchResultsCollection => Driver.FindElements(By.ClassName("rc"));
 
       public static ReadOnlyCollection<IWebElement> SearchHrefResultsCollection => Driver.FindElements(By.TagName("a"));
+
+      // This returns the primary div that contains the page navigation links
+      public static IWebElement BottomPageNavigation => Driver.FindElement(By.Id("navcnt"));
    }
 }

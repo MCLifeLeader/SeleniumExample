@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using NUnit.Framework;
@@ -26,6 +27,16 @@ namespace Selenium.Web.Extensions
       public static IWebElement FindByAttribute(this ReadOnlyCollection<IWebElement> webElements, string attribute, string value)
       {
          return webElements.FirstOrDefault(e => e.GetAttribute(attribute).Normalize() == value);
+      }
+
+      public static IList<IWebElement> FindAllByClassName(this ReadOnlyCollection<IWebElement> webElements, string className)
+      {
+         return webElements.Where(e => e.GetAttribute("class").Normalize() == className).ToList();
+      }
+
+      public static IWebElement FindByClassName(this ReadOnlyCollection<IWebElement> webElements, string className, string value)
+      {
+         return webElements.FindAllByClassName(className).FirstOrDefault(e => e.Text.Contains(value));
       }
 
       public static void Set(this IWebElement webElement, string value)
