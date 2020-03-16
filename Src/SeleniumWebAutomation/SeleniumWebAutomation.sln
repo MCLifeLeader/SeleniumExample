@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeleniumWebAutomation", "Se
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.Web", "Selenium.Web\Selenium.Web.csproj", "{6446D7EC-E83B-45B9-BB5B-9574EC49B25B}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Selenium.Database", "Selenium.Database\Selenium.Database.sqlproj", "{A12C871D-3487-467C-9CF9-F39AB5E684F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.Data", "Selenium.Data\Selenium.Data.csproj", "{912D86C0-5845-4BCB-A344-BDB88CBB6AA4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{6446D7EC-E83B-45B9-BB5B-9574EC49B25B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6446D7EC-E83B-45B9-BB5B-9574EC49B25B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6446D7EC-E83B-45B9-BB5B-9574EC49B25B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A12C871D-3487-467C-9CF9-F39AB5E684F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A12C871D-3487-467C-9CF9-F39AB5E684F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A12C871D-3487-467C-9CF9-F39AB5E684F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A12C871D-3487-467C-9CF9-F39AB5E684F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{912D86C0-5845-4BCB-A344-BDB88CBB6AA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{912D86C0-5845-4BCB-A344-BDB88CBB6AA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{912D86C0-5845-4BCB-A344-BDB88CBB6AA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{912D86C0-5845-4BCB-A344-BDB88CBB6AA4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
