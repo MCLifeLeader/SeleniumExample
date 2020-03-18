@@ -5,7 +5,7 @@ using System.Linq;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
-namespace Selenium.Web.Extensions
+namespace Selenium.Web.Tests.Extensions
 {
    public static class WebElement
    {

@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 
-namespace Selenium.Web.Model.Page.MbCarey
+namespace Selenium.Web.Tests.Model.Page.MbCarey
 {
    public class Qa : Navigation
    {

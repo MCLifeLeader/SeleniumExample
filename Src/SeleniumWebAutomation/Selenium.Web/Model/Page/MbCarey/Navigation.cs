@@ -1,9 +1,12 @@
-﻿using OpenQA.Selenium;
+﻿using System.Collections.ObjectModel;
+using OpenQA.Selenium;
 
-namespace Selenium.Web.Model.Page.MbCarey
+namespace Selenium.Web.Tests.Model.Page.MbCarey
 {
    public class Navigation : WebDriverConfig
    {
+      public static ReadOnlyCollection<IWebElement> AllLinksOnPage => Driver.FindElements(By.TagName("a"));
+
       public static IWebElement TopSiteHomeLink => Driver.FindElement(By.XPath("/html/body/header/nav/div/a"));
 
       public static IWebElement TopExperienceLink => Driver.FindElement(By.XPath("/html/body/header/nav/div/div/ul/li[1]/a"));

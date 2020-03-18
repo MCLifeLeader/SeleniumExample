@@ -1,5 +1,5 @@
 ﻿
-namespace Selenium.Web.Model.Enum
+namespace Selenium.Web.Tests.Model.Enum
 {
    public enum TestDriverType
    {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using OpenQA.Selenium;
 
-namespace Selenium.Web.Model.Page.Google
+namespace Selenium.Web.Tests.Model.Page.Google
 {
    public class SearchResults : WebDriverConfig
    {

@@ -3,9 +3,10 @@ using System.Data;
 using System.Reflection;
 using log4net;
 using NUnit.Framework;
-using Selenium.Web.Model.Page.MbCarey;
+using Selenium.Web.Tests.Extensions;
+using Selenium.Web.Tests.Model.Page.MbCarey;
 
-namespace Selenium.Web.Tests.MbCarey
+namespace Selenium.Web.Tests.Tests.MbCarey
 {
    [TestFixture]
    public class TestMbCarey : BaseTestClass
@@ -69,11 +70,17 @@ namespace Selenium.Web.Tests.MbCarey
       }
 
       [Test]
-      public void MenuNavigation()
+      public void MenuNavigationByExactElement()
       {
          _logger.DebugFormat($"'{GetType().Name}.{MethodBase.GetCurrentMethod().Name}' called");
 
          DerivedSetUp();
+
+         #region Explicit link refs Example
+
+         // This method of accessing the links is faster than the "AllLinksOnPage".
+         // Even though the DOM has to be accessed to pull back the link. The link is expressly defined using XPath.
+         // Additionally, there is no need to search the collection of links for a particular link.
 
          Navigation.TopExperienceLink.Click();
          Navigation.TopWorkHistoryLink.Click();
@@ -103,6 +110,55 @@ namespace Selenium.Web.Tests.MbCarey
          Navigation.TopLeadershipLink.Click();
 
          Navigation.TopGitLink.Click();
+         #endregion
+
+     }
+
+      [Test]
+      public void MenuNavigationByElementCollection()
+      {
+         _logger.DebugFormat($"'{GetType().Name}.{MethodBase.GetCurrentMethod().Name}' called");
+
+         DerivedSetUp();
+
+         #region Link by Collection
+
+         // Please note that the "AllLinksOnPage" collection will have more than just the menu navigation in its collection set.
+         // Using the "Collection" model of pulling back elements runs ever so slightly slower than the directly linked collection.
+         // This is due to the collection first needing to be loaded each time from the DOM and then searched through to find the desired Element.
+         // Personal preference (mine), I like the direct XPath model as it more accurately describes the page model essentially a
+         // 1:1 mapping for links to clickable events if they are static links. If the links are dynamically changing then the 
+         // collection of links method is preferred.
+
+         Navigation.AllLinksOnPage.FindByText("Experience").Click();
+         Navigation.AllLinksOnPage.FindByText("Work History").Click();
+
+         Navigation.AllLinksOnPage.FindByText("Projects").Click();
+         Navigation.AllLinksOnPage.FindByText("AdverTran").Click();
+         Navigation.AllLinksOnPage.FindByText("Projects").Click();
+         Navigation.AllLinksOnPage.FindByText("A Game").Click();
+         Navigation.AllLinksOnPage.FindByText("Projects").Click();
+         Navigation.AllLinksOnPage.FindByText("CIT 261").Click();
+         Navigation.AllLinksOnPage.FindByText("Projects").Click();
+         Navigation.AllLinksOnPage.FindByText("CS 313").Click();
+         Navigation.AllLinksOnPage.FindByText("Projects").Click();
+         Navigation.AllLinksOnPage.FindByText("CS 364").Click();
+         Navigation.AllLinksOnPage.FindByText("Projects").Click();
+         Navigation.AllLinksOnPage.FindByText("Encompass").Click();
+         Navigation.AllLinksOnPage.FindByText("Projects").Click();
+         Navigation.AllLinksOnPage.FindByText("Family Key").Click();
+         Navigation.AllLinksOnPage.FindByText("Projects").Click();
+         Navigation.AllLinksOnPage.FindByText("MLMLinkup").Click();
+         Navigation.AllLinksOnPage.FindByText("Projects").Click();
+         Navigation.AllLinksOnPage.FindByText("Redhead Mobile").Click();
+
+         Navigation.AllLinksOnPage.FindByText("Skills").Click();
+         Navigation.AllLinksOnPage.FindByText("Development / QA").Click();
+         Navigation.AllLinksOnPage.FindByText("Skills").Click();
+         Navigation.AllLinksOnPage.FindByText("Leadership").Click();
+
+         Navigation.AllLinksOnPage.FindByText("Git").Click();
+         #endregion
       }
 
       [Test]

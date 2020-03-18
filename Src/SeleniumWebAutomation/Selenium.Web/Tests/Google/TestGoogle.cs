@@ -4,12 +4,12 @@ using System.Reflection;
 using log4net;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using Selenium.Web.Extensions;
-using Selenium.Web.Model.Page.Google;
-using Selenium.Web.Model.Page.MbCarey;
-using Home = Selenium.Web.Model.Page.Google.Home;
+using Selenium.Web.Tests.Extensions;
+using Selenium.Web.Tests.Model.Page.Google;
+using Selenium.Web.Tests.Model.Page.MbCarey;
+using Home = Selenium.Web.Tests.Model.Page.Google.Home;
 
-namespace Selenium.Web.Tests.Google
+namespace Selenium.Web.Tests.Tests.Google
 {
    [TestFixture]
    public class TestGoogle : BaseTestClass

@@ -1,5 +1,5 @@
 ﻿
-namespace Selenium.Web.Model
+namespace Selenium.Web.Tests.Model
 {
    public class UserContext
    {

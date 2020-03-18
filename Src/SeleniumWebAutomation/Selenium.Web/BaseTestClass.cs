@@ -7,10 +7,10 @@ using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Support.UI;
-using Selenium.Web.Model;
-using Selenium.Web.Model.Enum;
+using Selenium.Web.Tests.Model;
+using Selenium.Web.Tests.Model.Enum;
 
-namespace Selenium.Web
+namespace Selenium.Web.Tests
 {
    public class BaseTestClass
    {

@@ -3,11 +3,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using log4net;
-using Selenium.Config;
-using Selenium.Web.Tests;
-using Selenium.Web.Tests.MbCarey;
+using Selenium.Web.Automation.Properties;
+using Selenium.Web.Tests.Tests.MbCarey;
 
-namespace SeleniumWebAutomation
+namespace Selenium.Web.Automation
 {
    class Program
    {

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using Selenium.Web.Model;
+using Selenium.Web.Tests.Model;
 
-namespace Selenium.Web
+namespace Selenium.Web.Tests
 {
    public class WebDriverConfig
    {
