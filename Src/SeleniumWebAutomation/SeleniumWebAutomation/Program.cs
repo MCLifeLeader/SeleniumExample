@@ -32,7 +32,8 @@ namespace Selenium.Web.Automation
          TestMbCarey mbcareyTests = new TestMbCarey();
          mbcareyTests.BaseSetUp(Settings.Default.WebUrlMbCarey);
          mbcareyTests.HomePage();
-         mbcareyTests.MenuNavigation();
+         mbcareyTests.MenuNavigationByExactElement();
+         mbcareyTests.MenuNavigationByElementCollection();
          //mbcareyTests.ExperiencePage();
          //mbcareyTests.ProjectsPage();
          //mbcareyTests.SkillsPage();
