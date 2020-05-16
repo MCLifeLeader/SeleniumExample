@@ -87,6 +87,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Services\Interfaces\IFactory.cs" />
     <Compile Include="Services\NinjectCommon.cs" />
     <Compile Include="Tests\Google\TestGoogle.cs" />
     <Compile Include="Tests\MbCarey\TestMbCarey.cs" />
