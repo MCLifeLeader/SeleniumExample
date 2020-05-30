@@ -153,7 +153,7 @@ namespace Selenium.Web.Tests.Tests.MbCarey
          Navigation.AllLinksOnPage.FindByText("Redhead Mobile").Click();
 
          Navigation.AllLinksOnPage.FindByText("Skills").Click();
-         Navigation.AllLinksOnPage.FindByText("Development / QA").Click();
+         Navigation.AllLinksOnPage.FindByText("Technical").Click();
          Navigation.AllLinksOnPage.FindByText("Skills").Click();
          Navigation.AllLinksOnPage.FindByText("Leadership").Click();
 

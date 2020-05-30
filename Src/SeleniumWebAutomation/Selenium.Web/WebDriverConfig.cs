@@ -128,6 +128,7 @@ namespace Selenium.Web.Tests
       /// <summary>
       /// Closes the window by URL or handle.
       /// </summary>
+      /// <param name="currentHandle"></param>
       /// <param name="urlOrHandle">The URL or handle.</param>
       /// <param name="timeSpan">The time span.</param>
       /// <param name="byHandle">if set to <c>true</c> [by handle].</param>
