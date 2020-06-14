@@ -3,8 +3,10 @@ using System.Data;
 using System.Reflection;
 using log4net;
 using NUnit.Framework;
+using OpenQA.Selenium;
 using Selenium.Web.Tests.Extensions;
 using Selenium.Web.Tests.Model.Page.MbCarey;
+using Selenium.Web.Tests.PageEvents.MbCarey;
 
 namespace Selenium.Web.Tests.Tests.MbCarey
 {
@@ -33,6 +35,11 @@ namespace Selenium.Web.Tests.Tests.MbCarey
       {
          _logger.DebugFormat($"'{GetType().Name}.{MethodBase.GetCurrentMethod().Name}' called");
 
+         if (string.IsNullOrEmpty(WebDriverConfig.ServiceEndPoint))
+         {
+            throw new NoNullAllowedException($"{nameof(WebDriverConfig.ServiceEndPoint)} cannot be null.");
+         }
+
          DerivedSetUp();
 
          Home.ResumeLink.Click();
@@ -44,10 +51,10 @@ namespace Selenium.Web.Tests.Tests.MbCarey
 
          Home.SkillsLink.Click();
          Navigation.TopSiteHomeLink.Click();
-         
+
          Home.ExperienceLink.Click();
          Navigation.TopSiteHomeLink.Click();
-         
+
          Home.LinkedInLink.Click();
          WebDriverConfig.CloseWindowByUrlOrHandle(WebDriverConfig.Driver.CurrentWindowHandle, "LinkedIn", TimeSpan.FromSeconds(5));
          Navigation.TopSiteHomeLink.Click();
@@ -70,54 +77,33 @@ namespace Selenium.Web.Tests.Tests.MbCarey
       }
 
       [Test]
-      public void MenuNavigationByExactElement()
+      public void NavigatePages()
       {
-         _logger.DebugFormat($"'{GetType().Name}.{MethodBase.GetCurrentMethod().Name}' called");
-
-         DerivedSetUp();
-
-         #region Explicit link refs Example
-
-         // This method of accessing the links is faster than the "AllLinksOnPage".
-         // Even though the DOM has to be accessed to pull back the link. The link is expressly defined using XPath.
-         // Additionally, there is no need to search the collection of links for a particular link.
-
-         Navigation.TopExperienceLink.Click();
-         Navigation.TopWorkHistoryLink.Click();
-
-         Navigation.TopProjectsLink.Click();
-         Navigation.TopAdverTranLink.Click();
-         Navigation.TopProjectsLink.Click();
-         Navigation.TopAGameLink.Click();
-         Navigation.TopProjectsLink.Click();
-         Navigation.TopCit261Link.Click();
-         Navigation.TopProjectsLink.Click();
-         Navigation.TopCs313Link.Click();
-         Navigation.TopProjectsLink.Click();
-         Navigation.TopCs364Link.Click();
-         Navigation.TopProjectsLink.Click();
-         Navigation.TopEncompassLink.Click();
-         Navigation.TopProjectsLink.Click();
-         Navigation.TopFamilyKeyLink.Click();
-         Navigation.TopProjectsLink.Click();
-         Navigation.TopMlmLinkupLink.Click();
-         Navigation.TopProjectsLink.Click();
-         Navigation.TopRedheadMobileLink.Click();
-
-         Navigation.TopSkillsLink.Click();
-         Navigation.TopDevelopmentQaLink.Click();
-         Navigation.TopSkillsLink.Click();
-         Navigation.TopLeadershipLink.Click();
-
-         Navigation.TopGitLink.Click();
-         #endregion
-
-     }
+         SiteNav.GotoLeadershipPage();
+         SiteNav.GotoA_GamePage();
+         SiteNav.GotoAdverTranPage();
+         SiteNav.GotoAzureServicesPage();
+         SiteNav.GotoCit261Page();
+         SiteNav.GotoCs313Page();
+         SiteNav.GotoCs364Page();
+         SiteNav.GotoEncompassPage();
+         SiteNav.GotoFamilyKeyPage();
+         SiteNav.GotoGitPage();
+         SiteNav.GotoMlmLinkupPage();
+         SiteNav.GotoRedheadMobilePage();
+         SiteNav.GotoTechnicalPage();
+         SiteNav.GotoWorkHistoryPage();
+      }
 
       [Test]
       public void MenuNavigationByElementCollection()
       {
          _logger.DebugFormat($"'{GetType().Name}.{MethodBase.GetCurrentMethod().Name}' called");
+
+         if (string.IsNullOrEmpty(WebDriverConfig.ServiceEndPoint))
+         {
+            throw new NoNullAllowedException($"{nameof(WebDriverConfig.ServiceEndPoint)} cannot be null.");
+         }
 
          DerivedSetUp();
 
@@ -162,7 +148,7 @@ namespace Selenium.Web.Tests.Tests.MbCarey
       }
 
       [Test]
-      public void ExperiencePage()
+      public void LeadershipPage()
       {
          _logger.DebugFormat($"'{GetType().Name}.{MethodBase.GetCurrentMethod().Name}' called");
 
@@ -170,28 +156,71 @@ namespace Selenium.Web.Tests.Tests.MbCarey
          {
             throw new NoNullAllowedException($"{nameof(WebDriverConfig.ServiceEndPoint)} cannot be null.");
          }
+
+         DerivedSetUp();
+
+         SiteNav.GotoLeadershipPage();
+
+         IWebElement element = Leadership.H2Elements.FindByText("Leadership");
+         Assert.IsNotNull(element);
+
+         element = Leadership.H3Elements.FindByText("DevOps Manager");
+         Assert.IsNotNull(element);
+
+         element = Leadership.H3Elements.FindByText("Quality Assurance Lead / Manager");
+         Assert.IsNotNull(element);
+
+         element = Leadership.H3Elements.FindByText("Scrum Master");
+         Assert.IsNotNull(element);
+
+         element = Leadership.H3Elements.FindByText("Development Lead / Manager");
+         Assert.IsNotNull(element);
+
+         element = Leadership.H3Elements.FindByText("Two Year Service Mission");
+         Assert.IsNotNull(element);
+
+         element = Leadership.H3Elements.FindByText("Personality and Leadership Profile");
+         Assert.IsNotNull(element);
+
+         element = Leadership.H3Elements.FindByText("Seminars, Trainings, Audios");
+         Assert.IsNotNull(element);
+
+         element = Leadership.H3Elements.FindByText("My Book List");
+         Assert.IsNotNull(element);
+
       }
 
-      [Test]
-      public void ProjectsPage()
-      {
-         _logger.DebugFormat($"'{GetType().Name}.{MethodBase.GetCurrentMethod().Name}' called");
+      //[Test]
+      //public void ExperiencePage()
+      //{
+      //   _logger.DebugFormat($"'{GetType().Name}.{MethodBase.GetCurrentMethod().Name}' called");
 
-         if (string.IsNullOrEmpty(WebDriverConfig.ServiceEndPoint))
-         {
-            throw new NoNullAllowedException($"{nameof(WebDriverConfig.ServiceEndPoint)} cannot be null.");
-         }
-      }
+      //   if (string.IsNullOrEmpty(WebDriverConfig.ServiceEndPoint))
+      //   {
+      //      throw new NoNullAllowedException($"{nameof(WebDriverConfig.ServiceEndPoint)} cannot be null.");
+      //   }
+      //}
 
-      [Test]
-      public void SkillsPage()
-      {
-         _logger.DebugFormat($"'{GetType().Name}.{MethodBase.GetCurrentMethod().Name}' called");
+      //[Test]
+      //public void ProjectsPage()
+      //{
+      //   _logger.DebugFormat($"'{GetType().Name}.{MethodBase.GetCurrentMethod().Name}' called");
 
-         if (string.IsNullOrEmpty(WebDriverConfig.ServiceEndPoint))
-         {
-            throw new NoNullAllowedException($"{nameof(WebDriverConfig.ServiceEndPoint)} cannot be null.");
-         }
-      }
+      //   if (string.IsNullOrEmpty(WebDriverConfig.ServiceEndPoint))
+      //   {
+      //      throw new NoNullAllowedException($"{nameof(WebDriverConfig.ServiceEndPoint)} cannot be null.");
+      //   }
+      //}
+
+      //[Test]
+      //public void SkillsPage()
+      //{
+      //   _logger.DebugFormat($"'{GetType().Name}.{MethodBase.GetCurrentMethod().Name}' called");
+
+      //   if (string.IsNullOrEmpty(WebDriverConfig.ServiceEndPoint))
+      //   {
+      //      throw new NoNullAllowedException($"{nameof(WebDriverConfig.ServiceEndPoint)} cannot be null.");
+      //   }
+      //}
    }
 }

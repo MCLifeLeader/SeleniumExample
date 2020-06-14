@@ -28,16 +28,12 @@ namespace Selenium.Web.Automation
 
          using (IKernel kernel = NinjectCommon.CreateKernel())
          {
-            //TestGoogle googleTests = new TestGoogle();
-            //googleTests.BaseSetUp(Settings.Default.WebUrlGoogle);
-            //googleTests.RunGoogleTest();
-            //googleTests.BaseTearDown();
-
             TestMbCarey mbcareyTests = new TestMbCarey();
             mbcareyTests.BaseSetUp(Settings.Default.WebUrlMbCarey);
             mbcareyTests.HomePage();
-            mbcareyTests.MenuNavigationByExactElement();
+            mbcareyTests.NavigatePages();
             mbcareyTests.MenuNavigationByElementCollection();
+            mbcareyTests.LeadershipPage();
             //mbcareyTests.ExperiencePage();
             //mbcareyTests.ProjectsPage();
             //mbcareyTests.SkillsPage();
