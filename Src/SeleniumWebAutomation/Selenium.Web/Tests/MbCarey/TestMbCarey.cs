@@ -6,7 +6,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using Selenium.Web.Tests.Extensions;
 using Selenium.Web.Tests.Model.Page.MbCarey;
-using Selenium.Web.Tests.PageEvents.MbCarey;
+using Selenium.Web.Tests.SharedSteps.MbCarey;
 
 namespace Selenium.Web.Tests.Tests.MbCarey
 {

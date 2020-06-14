@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Selenium.Web.Tests.Model.Page.MbCarey;
+﻿using Selenium.Web.Tests.Model.Page.MbCarey;
 
-namespace Selenium.Web.Tests.PageEvents.MbCarey
+namespace Selenium.Web.Tests.SharedSteps.MbCarey
 {
    /// <summary>
    /// This method of accessing the links is faster than the "AllLinksOnPage".
