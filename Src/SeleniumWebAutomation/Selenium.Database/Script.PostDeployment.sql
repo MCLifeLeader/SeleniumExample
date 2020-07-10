@@ -10,3 +10,11 @@ Post-Deployment Script Template
 --------------------------------------------------------------------------------------
 */
 
+DECLARE @itemCount AS INT
+
+BEGIN TRAN
+IF (SELECT COUNT(Id) AS Id FROM [dbo].[Configuration] WHERE [Key] = 'WebUrlMbCarey') = 0
+BEGIN
+   INSERT INTO [dbo].[Configuration] ([Key],[Value],[Note]) VALUES ('WebUrlMbCarey','https://www.mbcarey.com/','Michael Carey''s ePortfolio website.')
+END
+COMMIT TRAN
