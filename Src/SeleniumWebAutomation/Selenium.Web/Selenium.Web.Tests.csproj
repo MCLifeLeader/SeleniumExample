@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseTestClass.cs" />
+    <Compile Include="Extensions\JsonExtensions.cs" />
     <Compile Include="Extensions\WebElement.cs" />
     <Compile Include="Model\Enum\TestDriverType.cs" />
     <Compile Include="Model\Page\MbCarey\Home.cs" />

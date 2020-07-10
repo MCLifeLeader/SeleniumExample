@@ -29,7 +29,7 @@ namespace Selenium.Web.Automation
          using (IKernel kernel = NinjectCommon.CreateKernel())
          {
             TestMbCarey mbcareyTests = new TestMbCarey();
-            mbcareyTests.BaseSetUp(Settings.Default.WebUrlMbCarey);
+            mbcareyTests.BaseSetUp();
             mbcareyTests.HomePage();
             mbcareyTests.NavigatePages();
             mbcareyTests.MenuNavigationByElementCollection();

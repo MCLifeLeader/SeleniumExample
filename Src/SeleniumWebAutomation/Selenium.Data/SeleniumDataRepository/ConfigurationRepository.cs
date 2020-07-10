@@ -72,7 +72,7 @@ namespace Selenium.Data.SeleniumDataRepository
       {
          _logger.DebugFormat("Method {0} called", MethodBase.GetCurrentMethod().Name);
 
-         throw new NotImplementedException();
+         return _context.Configurations.AsQueryable();
       }
 
       public void Add(Configuration entity)

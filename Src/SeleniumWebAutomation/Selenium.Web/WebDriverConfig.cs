@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using Selenium.Data.SeleniumDataRepository;
 using Selenium.Web.Tests.Model;
 
 namespace Selenium.Web.Tests

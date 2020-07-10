@@ -7,6 +7,11 @@ using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Support.UI;
+using Selenium.Config;
+using Selenium.Data.Repository.Interfaces;
+using Selenium.Data.SeleniumDataRepository;
+using Selenium.Data.SeleniumDataRepository.Models;
+using Selenium.Web.Tests.Extensions;
 using Selenium.Web.Tests.Model;
 using Selenium.Web.Tests.Model.Enum;
 
@@ -21,13 +26,38 @@ namespace Selenium.Web.Tests
       public static TimeSpan SetPageLoadTimeout { get; set; } = new TimeSpan(0, 0, 0, 120);
       public static TimeSpan SetScriptTimeout { get; set; } = new TimeSpan(0, 0, 0, 120);
 
+      protected IUnitOfWork DataUnitOfWork { get; set; }
+      protected ConfigurationRepository DataConfigurationRepository { get; set; }
+
       [SetUp]
-      public void BaseSetUp(string serviceEndPoint, UserContext userContext = null)
+      public void BaseSetUp()
       {
          _logger.DebugFormat($"'{GetType().Name}.{MethodBase.GetCurrentMethod().Name}' called");
 
-         WebDriverConfig.ServiceEndPoint = serviceEndPoint;
-         WebDriverConfig.UserContext = userContext;
+         try
+         {
+            // This is an example on how to connect to a database through Entity Framework with full CRUD support.
+            // This example project should work with or without the database initialized.
+            // In the real world you would likely rely on the database being present and that if the database was missing
+            //    the test run would fail.
+
+            DataUnitOfWork = new SeleniumDataContext();
+            DataConfigurationRepository = new ConfigurationRepository(DataUnitOfWork);
+
+            Configuration mbCareyWeb = DataConfigurationRepository.GetEntityByKey("WebUrlMbCarey");
+            Configuration userContext = DataConfigurationRepository.GetEntityByKey("UserContext");
+
+            WebDriverConfig.ServiceEndPoint = !string.IsNullOrEmpty(mbCareyWeb.Value) ? mbCareyWeb.Value : Settings.Default.WebUrlMbCarey;
+            WebDriverConfig.UserContext = userContext != null ? userContext.Value.FromJson<UserContext>().GetAwaiter().GetResult() : new UserContext();
+         }
+         catch (Exception ex)
+         {
+            _logger.Warn(ex.Message, ex);
+
+            // Fall back if the database fails to init.
+            WebDriverConfig.ServiceEndPoint = Settings.Default.WebUrlMbCarey;
+            WebDriverConfig.UserContext = new UserContext();
+         }
 
          TestDriverType driverType = TestDriverType.FireFox;
 

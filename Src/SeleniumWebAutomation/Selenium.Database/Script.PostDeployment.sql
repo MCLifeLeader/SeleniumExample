@@ -17,4 +17,10 @@ IF (SELECT COUNT(Id) AS Id FROM [dbo].[Configuration] WHERE [Key] = 'WebUrlMbCar
 BEGIN
    INSERT INTO [dbo].[Configuration] ([Key],[Value],[Note]) VALUES ('WebUrlMbCarey','https://www.mbcarey.com/','Michael Carey''s ePortfolio website.')
 END
+
+IF (SELECT COUNT(Id) AS Id FROM [dbo].[Configuration] WHERE [Key] = 'UserContext') = 0
+BEGIN
+   INSERT INTO [dbo].[Configuration] ([Key],[Value],[Note]) VALUES ('UserContext','{"userName": "","password": ""}','UserContext Details.')
+END
+
 COMMIT TRAN
