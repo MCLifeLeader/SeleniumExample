@@ -6,14 +6,24 @@ namespace Selenium.Web.Tests.Extensions
 {
    public static class JsonExtensions
    {
-      public static async Task<T> FromJson<T>(this string json)
+      public static async Task<T> FromJsonAsync<T>( this string json )
       {
-         return await Task.Run(() => JsonConvert.DeserializeObject<T>(json));
+         return await Task.Run( () => JsonConvert.DeserializeObject<T>( json ) );
       }
 
-      public static async Task<string> ToJson(this object value)
+      public static T FromJson<T>( this string json )
       {
-         return await Task.Run(() => JsonConvert.SerializeObject(value));
+         return FromJsonAsync<T>( json ).GetAwaiter().GetResult();
+      }
+
+      public static async Task<string> ToJsonAsync( this object value )
+      {
+         return await Task.Run( () => JsonConvert.SerializeObject( value ) );
+      }
+
+      public static string ToJson( this object value )
+      {
+         return ToJsonAsync( value ).GetAwaiter().GetResult();
       }
 
       /// <summary>
@@ -21,14 +31,19 @@ namespace Selenium.Web.Tests.Extensions
       /// </summary>
       /// <param name="json">The json.</param>
       /// <returns></returns>
-      public static async Task<JObject> FromJsonToJObject(this string json)
+      public static async Task<JObject> FromJsonToJObjectAsync( this string json )
       {
-         if (string.IsNullOrEmpty(json))
+         if( string.IsNullOrEmpty( json ) )
          {
             return null;
          }
 
-         return await Task.Run(() => JObject.Parse(json));
+         return await Task.Run( () => JObject.Parse( json ) );
+      }
+
+      public static JObject FromJsonToJObject( this string json )
+      {
+         return FromJsonToJObjectAsync( json ).GetAwaiter().GetResult();
       }
 
       /// <summary>
@@ -36,14 +51,19 @@ namespace Selenium.Web.Tests.Extensions
       /// </summary>
       /// <param name="json">The json.</param>
       /// <returns></returns>
-      public static async Task<JArray> FromJsonToJArray(this string json)
+      public static async Task<JArray> FromJsonToJArrayAsync( this string json )
       {
-         if (string.IsNullOrEmpty(json))
+         if( string.IsNullOrEmpty( json ) )
          {
             return null;
          }
 
-         return await Task.Run(() => JArray.Parse(json));
+         return await Task.Run( () => JArray.Parse( json ) );
+      }
+
+      public static JArray FromJsonToJArray( this string json )
+      {
+         return FromJsonToJArrayAsync( json ).GetAwaiter().GetResult();
       }
    }
 }

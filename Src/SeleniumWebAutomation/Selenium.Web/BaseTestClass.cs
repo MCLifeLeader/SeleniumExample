@@ -48,7 +48,7 @@ namespace Selenium.Web.Tests
             Configuration userContext = DataConfigurationRepository.GetEntityByKey("UserContext");
 
             WebDriverConfig.ServiceEndPoint = !string.IsNullOrEmpty(mbCareyWeb.Value) ? mbCareyWeb.Value : Settings.Default.WebUrlMbCarey;
-            WebDriverConfig.UserContext = userContext != null ? userContext.Value.FromJson<UserContext>().GetAwaiter().GetResult() : new UserContext();
+            WebDriverConfig.UserContext = userContext != null ? userContext.Value.FromJson<UserContext>() : new UserContext();
          }
          catch (Exception ex)
          {
