@@ -2,14 +2,12 @@ using NUnit.Framework;
 
 namespace AutomationExamplesForTest.ApiTests
 {
-    [TestFixture]
-    public class ApiTestExamples
+    /// <summary>
+    /// This represents a series of API based tests
+    /// </summary>
+    [TestFixture, Parallelizable(ParallelScope.All)]
+    public class ApiTestExamples : BaseApi
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
         [Test]
         public void Test1()
         {

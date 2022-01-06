@@ -2,14 +2,12 @@ using NUnit.Framework;
 
 namespace AutomationExamplesForTest.WebTests
 {
-    [TestFixture]
-    public class WebTestExamples
+    /// <summary>
+    /// This represents a series of selenium based tests.
+    /// </summary>
+    [TestFixture, Parallelizable(ParallelScope.Default)]
+    public class WebTestExamples : BaseWeb
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
         [Test]
         public void Test1()
         {
