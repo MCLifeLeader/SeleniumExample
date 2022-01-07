@@ -12,25 +12,35 @@ namespace AutomationExamplesForTest
     /// <summary>
     /// This is intended to test web or restful apis.
     /// </summary>
-    [TestFixture]
     public class BaseFramework
     {
         private static readonly ILog _logger = LogManager.GetLogger(typeof(BaseFramework));
 
-        public static Dictionary<string,string> ConnectionStrings { get; set; }
+        public static Dictionary<string, string> ConnectionStrings { get; set; } = new Dictionary<string, string>();
+
         /// <summary>
         /// This value could be stored in a common shared configuration quick access class
         /// </summary>
-        public string BaseRoute { get; set; }
+        public string BaseRoute { get; set; } = string.Empty;
+
         /// <summary>
         /// This value could be stored in a common shared configuration quick access class
         /// </summary>
-        public string BaseUrl { get; set; }
+        public string BaseUrl { get; set; } = string.Empty;
 
         public BaseFramework()
         {
+        }
+
+        #region Base Test Framework startup and teardown methods
+
+        [OneTimeSetUp]
+        public virtual void OneTimeSetUp()
+        {
             InitFramework.InitLogger();
             InitFramework.InitConfiguration();
+
+            _logger.DebugFormat($"'{GetType().Name}.{nameof(OneTimeSetUp)}' called");
 
             if (InitFramework.Configuration == null)
             {
@@ -46,21 +56,12 @@ namespace AutomationExamplesForTest
 
             foreach (KeyValuePair<string, string> dbConnectionStr in rawStringsList)
             {
-                if (dbConnectionStr.Key != "ConnectionStrings")
+                if (dbConnectionStr.Key != "ConnectionStrings" && !ConnectionStrings.ContainsKey(dbConnectionStr.Key.Split(":")[1]))
                 {
                     // Removing the first part keyword "ConnectionStrings"
                     ConnectionStrings.Add(dbConnectionStr.Key.Split(":")[1], dbConnectionStr.Value);
                 }
             }
-        }
-
-
-        #region Base Test Framework startup and teardown methods
-
-        [OneTimeSetUp]
-        public virtual void OneTimeSetUp()
-        {
-            _logger.DebugFormat($"'{GetType().Name}.{nameof(OneTimeSetUp)}' called");
         }
 
         [OneTimeTearDown]

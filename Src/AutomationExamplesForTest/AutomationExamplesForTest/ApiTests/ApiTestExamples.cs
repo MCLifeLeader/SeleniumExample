@@ -1,3 +1,4 @@
+using log4net;
 using NUnit.Framework;
 
 namespace AutomationExamplesForTest.ApiTests
@@ -8,6 +9,8 @@ namespace AutomationExamplesForTest.ApiTests
     [TestFixture, Parallelizable(ParallelScope.All)]
     public class ApiTestExamples : BaseApi
     {
+        private static readonly ILog _logger = LogManager.GetLogger(typeof(ApiTestExamples));
+
         [Test]
         public void Test1()
         {

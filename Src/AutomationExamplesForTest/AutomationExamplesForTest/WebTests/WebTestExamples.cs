@@ -1,3 +1,5 @@
+using AutomationExamplesForTest.ApiTests;
+using log4net;
 using NUnit.Framework;
 
 namespace AutomationExamplesForTest.WebTests
@@ -8,6 +10,8 @@ namespace AutomationExamplesForTest.WebTests
     [TestFixture, Parallelizable(ParallelScope.Default)]
     public class WebTestExamples : BaseWeb
     {
+        private static readonly ILog _logger = LogManager.GetLogger(typeof(WebTestExamples));
+
         [Test]
         public void Test1()
         {

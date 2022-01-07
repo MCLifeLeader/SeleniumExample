@@ -1,11 +1,13 @@
-﻿using AutomationExamplesForTest.Startup;
+﻿using System.Collections.Generic;
+using System.Data;
+using AutomationExamplesForTest.Startup;
 using log4net;
+using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
 namespace AutomationExamplesForTest.WebTests
 {
-    [TestFixture]
     public class BaseWeb : BaseFramework
     {
         private static readonly ILog _logger = LogManager.GetLogger(typeof(BaseWeb));
@@ -15,20 +17,25 @@ namespace AutomationExamplesForTest.WebTests
 
         public BaseWeb()
         {
-            BrowserType = InitFramework.Configuration?
-                .GetSection("AppSettings")
-                .GetSection("WebBrowserConfiguration")["BrowserType"].ToLower();
         }
 
         [OneTimeSetUp]
         public override void OneTimeSetUp()
         {
+            _logger.DebugFormat($"'{GetType().Name}.{nameof(OneTimeSetUp)}' called");
+
             base.OneTimeSetUp();
+
+            BrowserType = InitFramework.Configuration?
+                .GetSection("AppSettings")
+                .GetSection("WebBrowserConfiguration")["BrowserType"].ToLower();
         }
 
         [OneTimeTearDown]
         public override void OneTimeTearDown()
         {
+            _logger.DebugFormat($"'{GetType().Name}.{nameof(OneTimeTearDown)}' called");
+
             base.OneTimeTearDown();
         }
     }
