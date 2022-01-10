@@ -1,4 +1,4 @@
-namespace AutomationExample.Web
+namespace AutomationExample.Web.Model
 {
     public class WeatherForecast
     {

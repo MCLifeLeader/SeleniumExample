@@ -21,7 +21,7 @@ namespace AutomationExamplesForTest.ApiTests
             RestClient client = new RestClient("http://localhost:49080");
             Assert.IsNotNull(client);
 
-            RestRequest request = new RestRequest("/WeatherForecast", Method.Get)
+            RestRequest request = new RestRequest("api/WeatherForecast", Method.Get)
             {
                 RequestFormat = DataFormat.Json
             };
