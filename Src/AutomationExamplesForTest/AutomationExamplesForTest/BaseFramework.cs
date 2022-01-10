@@ -39,6 +39,7 @@ namespace AutomationExamplesForTest
         {
             InitFramework.InitLogger();
             InitFramework.InitConfiguration();
+            //_ = InitFramework.StartWebInstance().Result;
 
             _logger.DebugFormat($"'{GetType().Name}.{nameof(OneTimeSetUp)}' called");
 
@@ -68,6 +69,8 @@ namespace AutomationExamplesForTest
         public virtual void OneTimeTearDown()
         {
             _logger.DebugFormat($"'{GetType().Name}.{nameof(OneTimeTearDown)}' called");
+
+            _ = InitFramework.StopWebInstance().Result;
         }
 
         [SetUp]

@@ -15,6 +15,8 @@ namespace AutomationExamplesForTest.WebTests
         [Test]
         public void Test1()
         {
+            _logger.DebugFormat($"'{GetType().Name}.{nameof(Test1)}' called");
+
             Assert.Pass();
         }
     }

@@ -1,7 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Xml;
+using Docker.DotNet;
+using Docker.DotNet.Models;
 using log4net;
 using log4net.Config;
 using log4net.Repository;
@@ -34,7 +42,8 @@ namespace AutomationExamplesForTest.Startup
             }
             else
             {
-                throw new Exception("Path.GetDirectoryName(typeof(TestingWithReferencedFiles).Assembly.Location) returned null");
+                throw new Exception(
+                    "Path.GetDirectoryName(typeof(TestingWithReferencedFiles).Assembly.Location) returned null");
             }
 
             if (File.Exists($"{Path.Combine(dir, "appsettings.json")}"))
@@ -78,7 +87,8 @@ namespace AutomationExamplesForTest.Startup
                     }
                     else
                     {
-                        throw new Exception("Path.GetDirectoryName(typeof(TestingWithReferencedFiles).Assembly.Location) returned null");
+                        throw new Exception(
+                            "Path.GetDirectoryName(typeof(TestingWithReferencedFiles).Assembly.Location) returned null");
                     }
 
                     XmlDocument log4NetConfig = new XmlDocument();
@@ -96,6 +106,79 @@ namespace AutomationExamplesForTest.Startup
                     Console.WriteLine($"WARNING: Unable to locate and initialize log4net.config - {ex.Message}");
                 }
             }
+        }
+
+        public static async Task<bool> StartWebInstance()
+        {
+            // Default Docker Engine
+            DockerClient? client = new DockerClientConfiguration(new Uri(DockerApiUri())).CreateClient();
+
+            IList<ContainerListResponse> containers = await client.Containers.ListContainersAsync(
+                new ContainersListParameters()
+                {
+                    All = true,
+                });
+
+            // ReSharper disable once StringLiteralTypo
+            ContainerListResponse containerResponse = containers.FirstOrDefault(e => e.Image.Contains("automationexampleweb"));
+
+            bool result = await client.Containers.StartContainerAsync(containerResponse?.ID, null);
+
+            string portNumber = string.Empty;
+            foreach (var port in containerResponse.Ports)
+            {
+                _logger.Debug($"IP={port.IP}");
+                _logger.Debug($"PublicPort={port.PublicPort}");
+                _logger.Debug($"PrivatePort={port.PrivatePort}");
+                _logger.Debug($"Type={port.Type}");
+
+                if (port.PrivatePort == 443)
+                {
+                    portNumber = port.PublicPort.ToString();
+                }
+            }
+
+            containerResponse.Command = $"exec -i -e ASPNETCORE_HTTPS_PORT={portNumber} -w \"/app\" sh -c dotnet --additionalProbingPath \"/root/.nuget/fallbackpackages\" \"/app/bin/Debug/net6.0/AutomationExample.Web.dll\"";
+
+            return result;
+        }
+
+        private static string DockerApiUri()
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                return "npipe://./pipe/docker_engine";
+            }
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                return "unix:/var/run/docker.sock";
+            }
+
+            throw new Exception("Was unable to determine what OS this is running on, does not appear to be Windows or Linux!?");
+        }
+
+        public static async Task<bool> StopWebInstance()
+        {
+            // Default Docker Engine on Windows
+            DockerClient? client = new DockerClientConfiguration(new Uri("npipe://./pipe/docker_engine")).CreateClient();
+
+            //ToDo: Detect OS and run alternate Image command
+            // Default Docker Engine on Linux
+            //DockerClient? client = new DockerClientConfiguration(new Uri("unix:///var/run/docker.sock")).CreateClient();
+
+            IList<ContainerListResponse> containers = await client.Containers.ListContainersAsync(
+                new ContainersListParameters()
+                {
+                    All = true,
+                });
+
+            // ReSharper disable once StringLiteralTypo
+            ContainerListResponse? containerResponse = containers.FirstOrDefault(e => e.Image.Contains("automationexampleweb"));
+
+            bool result = await client.Containers.StopContainerAsync(containerResponse?.ID, new ContainerStopParameters(), CancellationToken.None);
+
+            return result;
         }
     }
 }
