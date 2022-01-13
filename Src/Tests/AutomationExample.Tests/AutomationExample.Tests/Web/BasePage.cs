@@ -26,17 +26,17 @@ public class BasePage
     public WebDriverWait Wait { get; set; }
 
     /// <summary>
-    /// Active page model location / URL
+    ///     Active page model location / URL
     /// </summary>
     public string PageUrl { get; set; }
 
     /// <summary>
-    /// Port Number, if used
+    ///     Port Number, if used
     /// </summary>
-    public string PortNumber { get; set; }= "47080";
+    public string PortNumber { get; set; } = "47080";
 
     /// <summary>
-    /// Active page model title
+    ///     Active page model title
     /// </summary>
     public string PageTitle { get; set; }
 
@@ -45,7 +45,7 @@ public class BasePage
     #region CTOR
 
     /// <summary>
-    /// Force all Page Objects that are created to use the overloaded constructor.
+    ///     Force all Page Objects that are created to use the overloaded constructor.
     /// </summary>
     // ReSharper disable once UnusedMember.Local
     private BasePage()
@@ -70,10 +70,7 @@ public class BasePage
 
     private void EnsurePageLoaded()
     {
-        if (!Driver.EnsurePageLoaded(PageUrl, PageTitle))
-        {
-            throw new EntryPointNotFoundException("Broken");
-        }
+        if (!Driver.EnsurePageLoaded(PageUrl, PageTitle)) throw new EntryPointNotFoundException("Broken");
     }
 
     public void WaitTillGone(By by)
@@ -87,12 +84,8 @@ public class BasePage
         stopWatch.Start();
 
         while (Driver.FindElements(by).Any(e => e.Displayed))
-        {
             if (stopWatch.Elapsed.Seconds > timeSpan.Seconds)
-            {
                 return;
-            }
-        }
     }
 
     public void WaitTill(TimeSpan timeSpan)
@@ -101,12 +94,8 @@ public class BasePage
         stopWatch.Start();
 
         while (true)
-        {
             if (stopWatch.Elapsed.Seconds > timeSpan.Seconds)
-            {
                 return;
-            }
-        }
     }
 
     public IWebElement Element(string by)
@@ -131,20 +120,11 @@ public class BasePage
 
     public By GetBy(string findBy)
     {
-        if (findBy.Contains("<") & findBy.Contains(">"))
-        {
-            return By.TagName(findBy.Trim('<').Trim('>'));
-        }
+        if (findBy.Contains("<") & findBy.Contains(">")) return By.TagName(findBy.Trim('<').Trim('>'));
 
-        if (findBy.Contains("//"))
-        {
-            return By.XPath(findBy);
-        }
+        if (findBy.Contains("//")) return By.XPath(findBy);
 
-        if ((findBy.Contains(".") | findBy.Contains("#") | findBy.Contains("[")) & !findBy.Contains(".."))
-        {
-            return By.CssSelector(findBy);
-        }
+        if ((findBy.Contains(".") | findBy.Contains("#") | findBy.Contains("[")) & !findBy.Contains("..")) return By.CssSelector(findBy);
 
         return By.Id(findBy);
     }

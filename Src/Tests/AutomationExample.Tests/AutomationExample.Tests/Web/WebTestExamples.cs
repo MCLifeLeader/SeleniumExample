@@ -6,16 +6,15 @@ using NUnit.Framework;
 namespace AutomationExample.Tests.Web
 {
     /// <summary>
-    /// This represents a series of selenium based tests.
+    ///     This represents a series of selenium based tests.
     /// </summary>
-    [TestFixture, Parallelizable(ParallelScope.Default), Category("Selenium")]
+    [TestFixture]
+    [Parallelizable(ParallelScope.Default)]
+    [Category("Selenium")]
     public class WebTestExamples : BaseWeb
     {
-        // Setup the local class log4net logger
-        private static readonly ILog _logger = LogManager.GetLogger(typeof(WebTestExamples));
-
         /// <summary>
-        /// This is provided for an example. Use this to setup test state for each test executed.
+        ///     This is provided for an example. Use this to setup test state for each test executed.
         /// </summary>
         [SetUp]
         public override void SetUp()
@@ -24,7 +23,7 @@ namespace AutomationExample.Tests.Web
         }
 
         /// <summary>
-        /// This is provided for an example. Use this to tear down test state or reset test state after each test.
+        ///     This is provided for an example. Use this to tear down test state or reset test state after each test.
         /// </summary>
         [TearDown]
         public override void TearDown()
@@ -32,12 +31,18 @@ namespace AutomationExample.Tests.Web
             base.TearDown();
         }
 
+        // Setup the local class log4net logger
+        private static readonly ILog _logger = LogManager.GetLogger(typeof(WebTestExamples));
+
         /// <summary>
-        /// Example test using Selenium
+        ///     Example test using Selenium
         /// </summary>
         /// <param name="arguments">Test data arguments</param>
         // Individual test case attribute and parallel threading behavior defined.
-        [Test, Order(1), Parallelizable(ParallelScope.Default), Category("SeleniumTests")]
+        [Test]
+        [Order(1)]
+        [Parallelizable(ParallelScope.Default)]
+        [Category("SeleniumTests")]
         // Inject data directly into the test case.
         // You can add additional parameters / test data.
         [TestCase("WorkItem", "000001", Category = "SeleniumDev")]
@@ -62,11 +67,14 @@ namespace AutomationExample.Tests.Web
         }
 
         /// <summary>
-        /// Example test using Selenium
+        ///     Example test using Selenium
         /// </summary>
         /// <param name="arguments">Test data arguments</param>
         // Individual test case attribute and parallel threading behavior defined.
-        [Test, Order(2), Parallelizable(ParallelScope.Default), Category("SeleniumTests")]
+        [Test]
+        [Order(2)]
+        [Parallelizable(ParallelScope.Default)]
+        [Category("SeleniumTests")]
         [TestCase("WorkItem", "000003", Category = "Example")]
         public void ClickCounterButton(params object[] arguments)
         {

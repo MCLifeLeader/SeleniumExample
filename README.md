@@ -1,6 +1,6 @@
 # DSO Automation Project
 
-This project repository is to store example and other developer related artifacts to help document the automation and testing of various products within ICS. This automation project will provide an example on running C# NUnit tests that will execute a simple HTTP RESTful call and will then execute a Selenium UI automation process.
+This project repository is to store example and other developer related artifacts to help document the automation and testing of various products. This automation project will provide an example on running C# NUnit tests that will execute a simple HTTP RESTful call and will then execute a Selenium UI automation process.
 
 ## Dependencies
 

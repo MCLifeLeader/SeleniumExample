@@ -12,13 +12,6 @@ namespace AutomationExample.Tests.Web.PageModels
 
         #endregion
 
-        #region Page Objects
-
-        public IWebElement CounterParagraphElement => Driver.FindElement(By.XPath("/html/body/div[1]/main/article/p"));
-        public IWebElement CounterButton => Driver.FindElement(By.CssSelector("body > div.page > main > article > button"));
-
-        #endregion
-
         public Counter(IWebDriver driver) : base(driver)
         {
             PageTitle = "Counter";
@@ -31,6 +24,14 @@ namespace AutomationExample.Tests.Web.PageModels
         {
             CounterButton.Click();
         }
+
+        #endregion
+
+        #region Page Objects
+
+        public IWebElement CounterParagraphElement => Driver.FindElement(By.XPath("/html/body/div[1]/main/article/p"));
+        public IWebElement CounterButton => Driver.FindElement(By.CssSelector("body > div.page > main > article > button"));
+
         #endregion
     }
 }

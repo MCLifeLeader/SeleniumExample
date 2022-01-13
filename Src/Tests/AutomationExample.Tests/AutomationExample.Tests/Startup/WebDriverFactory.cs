@@ -11,50 +11,14 @@ using OpenQA.Selenium.Firefox;
 namespace AutomationExample.Tests.Startup
 {
     /// <summary>
-    /// A Mechanism for creating browser session for Selenium based UI automation testing.
+    ///     A Mechanism for creating browser session for Selenium based UI automation testing.
     /// </summary>
     public class WebDriverFactory
     {
-        #region Properties
-
-        // Setup the local class log4net logger
-        private static readonly ILog _logger = LogManager.GetLogger(typeof(WebDriverFactory));
-
-        /// <summary>
-        /// Set the base implicit amount of time to wait before timing out
-        /// </summary>
-        protected int TimeoutImplicitWaitSecs { get; set; } = 10;
-        /// <summary>
-        /// Set the amount of time to allow a web page to load before timing out
-        /// </summary>
-        protected int TimeoutPageLoadSecs { get; set; } = 300;
-        /// <summary>
-        /// Amount of time to allow JavaScript to execute before timing out
-        /// </summary>
-        protected int TimeoutJavascriptSecs { get; set; } = 30;
-        /// <summary>
-        /// Cammand timeout in seconds
-        /// </summary>
-        protected int TimeoutCommandSecs { get; set; } = 60;
-        /// <summary>
-        /// Set the browser to be displayed visually or hidden
-        /// </summary>
-        protected bool HeadlessBrowser { get; set; } = false;
-        /// <summary>
-        /// Represents the data stored and found within appsettings.json
-        /// </summary>
-        protected IConfiguration Configuration { get; set; }
-        /// <summary>
-        /// Set the browser type to be launched and run the UI automation within
-        /// </summary>
-        protected WebDriverType BrowserType { get; set; } = WebDriverType.Chrome;
-
-        #endregion
-
         #region CTOR
 
         /// <summary>
-        /// Initialize custom values for the timeouts and webdriver types.
+        ///     Initialize custom values for the timeouts and webdriver types.
         /// </summary>
         /// <param name="config">Custom Configuration Settings from appsettings.json</param>
         /// <exception cref="ArgumentNullException"></exception>
@@ -65,23 +29,23 @@ namespace AutomationExample.Tests.Startup
             TimeoutPageLoadSecs = int.Parse(Configuration
                 .GetSection("AppSettings")
                 .GetSection("WebBrowserConfiguration")["PageLoadTimeoutInSeconds"]);
-           
+
             TimeoutImplicitWaitSecs = int.Parse(Configuration
                 .GetSection("AppSettings")
                 .GetSection("WebBrowserConfiguration")["ImplicitWaitInSeconds"]);
-         
+
             TimeoutJavascriptSecs = int.Parse(Configuration
                 .GetSection("AppSettings")
                 .GetSection("WebBrowserConfiguration")["JavascriptTimeoutInSeconds"]);
-         
+
             TimeoutCommandSecs = int.Parse(Configuration
                 .GetSection("AppSettings")
                 .GetSection("WebBrowserConfiguration")["TimeoutCommandSecs"]);
-          
+
             HeadlessBrowser = bool.Parse(Configuration
                 .GetSection("AppSettings")
                 .GetSection("WebBrowserConfiguration")["HeadlessBrowser"]);
-          
+
             Enum.TryParse(Configuration
                 .GetSection("AppSettings")
                 .GetSection("WebBrowserConfiguration")["BrowserType"], true, out WebDriverType driverType);
@@ -90,10 +54,52 @@ namespace AutomationExample.Tests.Startup
 
         #endregion
 
+        #region Properties
+
+        // Setup the local class log4net logger
+        private static readonly ILog _logger = LogManager.GetLogger(typeof(WebDriverFactory));
+
+        /// <summary>
+        ///     Set the base implicit amount of time to wait before timing out
+        /// </summary>
+        protected int TimeoutImplicitWaitSecs { get; set; } = 10;
+
+        /// <summary>
+        ///     Set the amount of time to allow a web page to load before timing out
+        /// </summary>
+        protected int TimeoutPageLoadSecs { get; set; } = 300;
+
+        /// <summary>
+        ///     Amount of time to allow JavaScript to execute before timing out
+        /// </summary>
+        protected int TimeoutJavascriptSecs { get; set; } = 30;
+
+        /// <summary>
+        ///     Cammand timeout in seconds
+        /// </summary>
+        protected int TimeoutCommandSecs { get; set; } = 60;
+
+        /// <summary>
+        ///     Set the browser to be displayed visually or hidden
+        /// </summary>
+        protected bool HeadlessBrowser { get; set; }
+
+        /// <summary>
+        ///     Represents the data stored and found within appsettings.json
+        /// </summary>
+        protected IConfiguration Configuration { get; set; }
+
+        /// <summary>
+        ///     Set the browser type to be launched and run the UI automation within
+        /// </summary>
+        protected WebDriverType BrowserType { get; set; } = WebDriverType.Chrome;
+
+        #endregion
+
         #region Factory Methods
 
         /// <summary>
-        /// Initialize a browser instance for UI automation
+        ///     Initialize a browser instance for UI automation
         /// </summary>
         /// <returns>Instantiated WebDriver instance</returns>
         /// <exception cref="NoNullAllowedException"></exception>
@@ -102,16 +108,14 @@ namespace AutomationExample.Tests.Startup
             _logger.DebugFormat($"'{GetType().Name}.{nameof(Initialize)}' called");
 
             if (Configuration == null)
-            {
                 throw new NoNullAllowedException(
                     $"Configuration not set. Init Config or call overloaded method WebDriverFactory.Initialize({typeof(WebDriverType)})");
-            }
 
             return Initialize(BrowserType);
         }
 
         /// <summary>
-        /// Initialize a browser instance for UI automation
+        ///     Initialize a browser instance for UI automation
         /// </summary>
         /// <param name="webDriverType">Custom Browser Instance</param>
         /// <param name="arguments">Additional configuration actions for the WebDriver instance to be passed into the browser</param>
@@ -133,18 +137,11 @@ namespace AutomationExample.Tests.Startup
                     FirefoxOptions fireFoxOptions = new FirefoxOptions();
                     fireFoxOptions.SetLoggingPreference(LogType.Browser, LogLevel.All);
                     fireFoxOptions.AcceptInsecureCertificates = true;
-                    if (HeadlessBrowser)
-                    {
-                        fireFoxOptions.AddArgument("--headless");
-                    }
+                    if (HeadlessBrowser) fireFoxOptions.AddArgument("--headless");
 
                     if (arguments != null && arguments.Length > 0)
-                    {
                         foreach (string argument in arguments)
-                        {
                             fireFoxOptions.AddArgument(argument);
-                        }
-                    }
 
                     FirefoxDriverService firefoxDriverService = FirefoxDriverService.CreateDefaultService();
                     firefoxDriverService.HideCommandPromptWindow = true;
@@ -159,18 +156,11 @@ namespace AutomationExample.Tests.Startup
                     chromeOptions.AcceptInsecureCertificates = true;
                     chromeOptions.AddArgument("use-fake-ui-for-media-stream");
                     chromeOptions.AddArgument("no-sandbox");
-                    if (HeadlessBrowser)
-                    {
-                        chromeOptions.AddArgument("--headless");
-                    }
+                    if (HeadlessBrowser) chromeOptions.AddArgument("--headless");
 
                     if (arguments != null && arguments.Length > 0)
-                    {
                         foreach (string argument in arguments)
-                        {
                             chromeOptions.AddArgument(argument);
-                        }
-                    }
 
                     ChromeDriverService chromeDriverService = ChromeDriverService.CreateDefaultService();
                     chromeDriverService.HideCommandPromptWindow = true;
@@ -185,18 +175,11 @@ namespace AutomationExample.Tests.Startup
                     edgeOptions.UseChromium = true; // Microsoft.Edge.SeleniumTools
                     edgeOptions.UseWebView = true;
                     edgeOptions.AcceptInsecureCertificates = true;
-                    if (HeadlessBrowser)
-                    {
-                        edgeOptions.AddArgument("headless");
-                    }
+                    if (HeadlessBrowser) edgeOptions.AddArgument("headless");
 
                     if (arguments != null && arguments.Length > 0)
-                    {
                         foreach (string argument in arguments)
-                        {
                             edgeOptions.AddArgument(argument);
-                        }
-                    }
 
                     EdgeDriverService edgeService = EdgeDriverService.CreateChromiumService();
                     edgeService.HideCommandPromptWindow = true;
@@ -214,20 +197,11 @@ namespace AutomationExample.Tests.Startup
                     throw new ArgumentException($"Browser was not initialized {webDriverType}", nameof(webDriverType));
             }
 
-            if (TimeoutImplicitWaitSecs > 0)
-            {
-                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(TimeoutImplicitWaitSecs);
-            }
+            if (TimeoutImplicitWaitSecs > 0) driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(TimeoutImplicitWaitSecs);
 
-            if (TimeoutPageLoadSecs > 0)
-            {
-                driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(TimeoutPageLoadSecs);
-            }
+            if (TimeoutPageLoadSecs > 0) driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(TimeoutPageLoadSecs);
 
-            if (TimeoutJavascriptSecs > 0)
-            {
-                driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(TimeoutJavascriptSecs);
-            }
+            if (TimeoutJavascriptSecs > 0) driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(TimeoutJavascriptSecs);
 
             driver.Manage().Window.Maximize();
             // This is provided as an example for changing the resolution on your browser session.

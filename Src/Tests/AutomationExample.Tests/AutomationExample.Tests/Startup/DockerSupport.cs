@@ -9,7 +9,7 @@ using log4net;
 namespace AutomationExample.Tests.Startup
 {
     /// <summary>
-    /// Provide automation code a method for creating and launching docker containers.
+    ///     Provide automation code a method for creating and launching docker containers.
     /// </summary>
     public class DockerSupport
     {
@@ -24,9 +24,36 @@ namespace AutomationExample.Tests.Startup
             _dockerClient = new DockerClientConfiguration(new Uri(DockerApiUri())).CreateClient();
         }
 
-        #region Public Methods
+        #region Private Methods
+
         /// <summary>
-        /// Pull a docker image from its repository
+        ///     Look up the running operating system the code is executing on
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        private string DockerApiUri()
+        {
+            _logger.DebugFormat($"'{GetType().Name}.{nameof(DockerApiUri)}' called");
+
+            bool isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+
+            if (isWindows) return "npipe://./pipe/docker_engine";
+
+            bool isLinux = RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
+            bool isMacOs = RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
+
+            if (isLinux || isMacOs) return "unix:/var/run/docker.sock";
+
+            throw new Exception(
+                "Was unable to determine what OS this is running on, does not appear to be Windows, MacOS or Linux!?");
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        /// <summary>
+        ///     Pull a docker image from its repository
         /// </summary>
         /// <param name="image"></param>
         /// <param name="tag"></param>
@@ -47,7 +74,7 @@ namespace AutomationExample.Tests.Startup
         }
 
         /// <summary>
-        /// Create and start a docker container from a docker image
+        ///     Create and start a docker container from a docker image
         /// </summary>
         /// <param name="image"></param>
         /// <param name="tag"></param>
@@ -55,9 +82,9 @@ namespace AutomationExample.Tests.Startup
         /// <param name="containerPort"></param>
         /// <param name="environmentVariables"></param>
         /// <returns></returns>
-        public async Task<string> StartContainerAsync(string image, 
-            string tag, 
-            string hostPort, 
+        public async Task<string> StartContainerAsync(string image,
+            string tag,
+            string hostPort,
             string containerPort,
             IList<string> environmentVariables)
         {
@@ -76,7 +103,7 @@ namespace AutomationExample.Tests.Startup
                 {
                     PortBindings = new Dictionary<string, IList<PortBinding>>
                     {
-                        {containerPort, new List<PortBinding> {new PortBinding {HostPort = hostPort}}}
+                        { containerPort, new List<PortBinding> { new() { HostPort = hostPort } } }
                     },
                     PublishAllPorts = false
                 },
@@ -89,7 +116,7 @@ namespace AutomationExample.Tests.Startup
         }
 
         /// <summary>
-        /// Stop a running docker container
+        ///     Stop a running docker container
         /// </summary>
         /// <param name="containerId"></param>
         /// <returns></returns>
@@ -97,41 +124,9 @@ namespace AutomationExample.Tests.Startup
         {
             _logger.DebugFormat($"'{GetType().Name}.{nameof(StopContainerAsync)}' called");
 
-            if (containerId != null)
-            {
-                await _dockerClient.Containers.KillContainerAsync(containerId, new ContainerKillParameters());
-            }
+            if (containerId != null) await _dockerClient.Containers.KillContainerAsync(containerId, new ContainerKillParameters());
         }
-        #endregion
 
-        #region Private Methods
-        /// <summary>
-        /// Look up the running operating system the code is executing on
-        /// </summary>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        private string DockerApiUri()
-        {
-            _logger.DebugFormat($"'{GetType().Name}.{nameof(DockerApiUri)}' called");
-
-            bool isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
-
-            if (isWindows)
-            {
-                return "npipe://./pipe/docker_engine";
-            }
-
-            bool isLinux = RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
-            bool isMacOs = RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
-
-            if (isLinux || isMacOs)
-            {
-                return "unix:/var/run/docker.sock";
-            }
-
-            throw new Exception(
-                "Was unable to determine what OS this is running on, does not appear to be Windows, MacOS or Linux!?");
-        }
         #endregion
     }
 }

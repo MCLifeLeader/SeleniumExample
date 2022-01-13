@@ -6,7 +6,7 @@ using OpenQA.Selenium;
 namespace AutomationExample.Tests.Web
 {
     /// <summary>
-    /// Setting up some basic testing framework to make it easier to write tests.
+    ///     Setting up some basic testing framework to make it easier to write tests.
     /// </summary>
     public class BaseWeb : BaseFramework
     {
@@ -16,7 +16,7 @@ namespace AutomationExample.Tests.Web
         protected IWebDriver Driver { get; set; }
 
         /// <summary>
-        /// Used to setup session test state. This will typically only be run once per test fixture.
+        ///     Used to setup session test state. This will typically only be run once per test fixture.
         /// </summary>
         [OneTimeSetUp]
         public override void OneTimeSetUp()
@@ -31,7 +31,7 @@ namespace AutomationExample.Tests.Web
         }
 
         /// <summary>
-        /// Used to tear down session test state. This will typically only be run once per test fixture.
+        ///     Used to tear down session test state. This will typically only be run once per test fixture.
         /// </summary>
         [OneTimeTearDown]
         public override void OneTimeTearDown()

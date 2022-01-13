@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Docker.DotNet.Models;
+﻿using System.Collections.Generic;
 using log4net;
 using OpenQA.Selenium;
 
@@ -15,6 +13,12 @@ namespace AutomationExample.Tests.Web.PageModels
 
         #endregion
 
+        public FetchData(IWebDriver driver) : base(driver)
+        {
+            PageTitle = "Weather forecast";
+            PageUrl = $"http://localhost:{PortNumber}/fetchdata";
+        }
+
         #region Page Objects
 
         public IWebElement FetchDataArticleElement => Driver.FindElement(By.XPath("/html/body/div[1]/main/article"));
@@ -22,13 +26,8 @@ namespace AutomationExample.Tests.Web.PageModels
 
         #endregion
 
-        public FetchData(IWebDriver driver) : base(driver)
-        {
-            PageTitle = "Weather forecast";
-            PageUrl = $"http://localhost:{PortNumber}/fetchdata";
-        }
-
         #region Page Actions
+
         #endregion
     }
 }

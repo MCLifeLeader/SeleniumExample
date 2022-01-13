@@ -10,10 +10,12 @@ using RestSharp;
 namespace AutomationExample.Tests.Api
 {
     /// <summary>
-    /// This represents a series of API based tests
+    ///     This represents a series of API based tests
     /// </summary>
     // Test Fixture attributes
-    [TestFixture, Parallelizable(ParallelScope.All), Category("Api")]
+    [TestFixture]
+    [Parallelizable(ParallelScope.All)]
+    [Category("Api")]
     public class ApiTestExamples : BaseApi
     {
         // Setup the local class log4net logger
@@ -21,11 +23,13 @@ namespace AutomationExample.Tests.Api
         private readonly string _portNumber = "46080";
 
         /// <summary>
-        /// RESTful API test automation example
+        ///     RESTful API test automation example
         /// </summary>
         /// <param name="arguments">Test data arguments</param>
         // Individual test case attribute and parallel threading behavior defined.
-        [Test, Parallelizable(ParallelScope.All), Category("ApiTests")]
+        [Test]
+        [Parallelizable(ParallelScope.All)]
+        [Category("ApiTests")]
         // Inject data directly into the test case.
         // You can add additional parameters / test data.
         [TestCase("WorkItem", "000004", Category = "RestApiDev")]
@@ -43,7 +47,7 @@ namespace AutomationExample.Tests.Api
             Assert.IsNotNull(client);
 
             // Create the request that will be used
-            RestRequest request = new RestRequest("api/Weather/WeatherForecast", Method.Get)
+            RestRequest request = new RestRequest("api/Weather/WeatherForecast")
             {
                 RequestFormat = DataFormat.Json
             };
@@ -59,11 +63,13 @@ namespace AutomationExample.Tests.Api
         }
 
         /// <summary>
-        /// RESTful API test automation example
+        ///     RESTful API test automation example
         /// </summary>
         /// <param name="arguments">Test data arguments</param>
         // Individual test case attribute and parallel threading behavior defined.
-        [Test, Parallelizable(ParallelScope.All), Category("ApiTests")]
+        [Test]
+        [Parallelizable(ParallelScope.All)]
+        [Category("ApiTests")]
         // Inject data directly into the test case.
         // You can add additional parameters / test data.
         [TestCase("WorkItem", "000007", Category = "RestApiTest")]
@@ -87,7 +93,7 @@ namespace AutomationExample.Tests.Api
             request.AddHeader("accept", "application/json");
 
             Random random = new Random((int)DateTime.UtcNow.Ticks);
-            WeatherData weatherData = new WeatherData()
+            WeatherData weatherData = new WeatherData
             {
                 Date = DateTime.UtcNow,
                 Summary = "Test Data Post",

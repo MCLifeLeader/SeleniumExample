@@ -8,7 +8,7 @@ namespace AutomationExample.WebApi.Controllers
     [Route("api/[controller]")]
     public class WeatherController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
+        private static readonly string[] Summaries =
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
@@ -19,7 +19,7 @@ namespace AutomationExample.WebApi.Controllers
         {
             _logger = logger;
         }
-        
+
         [HttpGet("WeatherForecast")]
         public async Task<ActionResult<Result<IEnumerable<WeatherForecast>>>> WeatherForecast()
         {
@@ -47,7 +47,7 @@ namespace AutomationExample.WebApi.Controllers
             _logger.LogInformation("Post Method Called");
             _logger.LogInformation($"{await weatherData.ToJsonAsync()}");
 
-            return new Result<WeatherData>() { Data = weatherData.FromJson<WeatherData>() };
+            return new Result<WeatherData> { Data = weatherData.FromJson<WeatherData>() };
         }
     }
 }
