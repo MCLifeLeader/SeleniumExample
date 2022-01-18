@@ -42,12 +42,12 @@ namespace AutomationExample.WebApi.Controllers
         }
 
         [HttpPost("WeatherData")]
-        public async Task<ActionResult<Result<WeatherData>>> WeatherData([FromBody] string weatherData)
+        public async Task<ActionResult<Result<WeatherData>>> WeatherData([FromBody] WeatherData weatherData)
         {
             _logger.LogInformation("Post Method Called");
             _logger.LogInformation($"{await weatherData.ToJsonAsync()}");
 
-            return new Result<WeatherData> { Data = weatherData.FromJson<WeatherData>() };
+            return new Result<WeatherData> { Data = weatherData };
         }
     }
 }
