@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 namespace AutomationExample.Tests.Extensions
 {
     /// <summary>
-    ///     Json object manipulation extension methods
+    /// Json object manipulation extension methods
     /// </summary>
     public static class JsonExtensions
     {

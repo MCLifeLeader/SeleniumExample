@@ -12,20 +12,19 @@ namespace AutomationExample.Tests.Web.PageModels
 
         #endregion
 
-        public Home(IWebDriver driver) : base(driver)
-        {
-            PageTitle = "Automation Example Web Application";
-            PageUrl = $"http://localhost:{PortNumber}";
-        }
-
         #region Page Objects
 
         public IWebElement HomeParagraphElement => Driver.FindElement(By.XPath("/html/body/div[1]/main/article/div/div/p"));
 
         #endregion
 
-        #region Page Actions
+        public Home(IWebDriver driver) : base(driver)
+        {
+            PageTitle = "Automation Example Web Application";
+            PageUrl = $"http://localhost:{PortNumber}";
+        }
 
+        #region Page Actions
         #endregion
     }
 }

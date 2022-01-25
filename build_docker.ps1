@@ -1,5 +1,5 @@
 # Build the AutomationExample.WebApi project
-Set-Location .\Src\Docker\AutomationExample.WebApi\ 
+Set-Location .\Src\Docker\AutomationExample.WebApi\
 dotnet build --configuration Release --source .\AutomationExample.WebApi.sln --source ..\..\..\Nuget\nuget.config
 docker build -f ".\AutomationExample.WebApi\Dockerfile" --force-rm -t automationexamplewebapi  --label "com.microsoft.created-by=visual-studio" --label "com.microsoft.visual-studio.project-name=AutomationExample.WebApi" ".\"
 

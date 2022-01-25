@@ -11,7 +11,7 @@ using Microsoft.Extensions.Configuration;
 namespace AutomationExample.Tests.Startup
 {
     /// <summary>
-    ///     This method of initializing a framework isn't necessarily the best. Alternately you can use injection scaffolding.
+    /// This method of initializing a framework isn't necessarily the best. Alternately you can use injection scaffolding.
     /// </summary>
     public static class InitFramework
     {
@@ -20,14 +20,14 @@ namespace AutomationExample.Tests.Startup
 
         // Prevent double execution of the log4net code
         private static bool _loggingInitComplete { get; set; }
-
+        
         /// <summary>
-        ///     Represents the data found within appsettings.json
+        /// Represents the data found within appsettings.json
         /// </summary>
         public static IConfiguration? Configuration { get; private set; }
 
         /// <summary>
-        ///     Read the appsettings.json file and keep those values in memory for later access.
+        /// Read the appsettings.json file and keep those values in memory for later access.
         /// </summary>
         /// <exception cref="Exception"></exception>
         /// <exception cref="FileNotFoundException"></exception>
@@ -74,6 +74,7 @@ namespace AutomationExample.Tests.Startup
         {
             // Only initialize the logging service once. Ignore later start requests.
             if (!_loggingInitComplete)
+            {
                 try
                 {
                     // Set the current working directory to the same location as the executing / runtime application.
@@ -103,6 +104,7 @@ namespace AutomationExample.Tests.Startup
                     // Provide a warning. This is not a critical failure as testing can continue. No logging to disk will occur.
                     Console.WriteLine($"WARNING: Unable to locate and initialize log4net.config - {ex.Message}");
                 }
+            }
 
             _logger.DebugFormat($"'{nameof(InitFramework)}.{nameof(InitLogger)}' called");
         }

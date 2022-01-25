@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using System;
+using log4net;
 using OpenQA.Selenium;
 
 namespace AutomationExample.Tests.Web.PageModels
@@ -12,12 +13,6 @@ namespace AutomationExample.Tests.Web.PageModels
 
         #endregion
 
-        public Navigation(IWebDriver driver) : base(driver)
-        {
-            PageTitle = "Automation Example Web Application";
-            PageUrl = $"http://localhost:{PortNumber}";
-        }
-
         #region Page Objects
 
         public IWebElement PageTitleLink => Driver.FindElement(By.CssSelector(".navbar-brand"));
@@ -26,6 +21,12 @@ namespace AutomationExample.Tests.Web.PageModels
         public IWebElement FetchDataLink => Driver.FindElement(By.XPath("/html/body/div[1]/div/div[2]/nav/div[3]/a"));
 
         #endregion
+
+        public Navigation(IWebDriver driver) : base(driver)
+        {
+            PageTitle = "Automation Example Web Application";
+            PageUrl = $"http://localhost:{PortNumber}";
+        }
 
         #region Page Actions
 

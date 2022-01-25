@@ -1,10 +1,11 @@
-﻿using log4net;
+﻿using AutomationExample.Tests.Startup;
+using log4net;
 using OpenQA.Selenium;
 
 namespace AutomationExample.Tests.Extensions
 {
     /// <summary>
-    ///     WebDriver Extension methods
+    /// WebDriver Extension methods
     /// </summary>
     public static class WebDriver
     {

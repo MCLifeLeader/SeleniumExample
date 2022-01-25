@@ -11,6 +11,7 @@ This project repository is to store example and other developer related artifact
   * If on Windows use Linux support (WSL)
   * I use Docker Desktop and recommend it as it provides a GUI interface to running the containers and container management.
 * The AutomationExample.Tests project needs both the AutomationExample.WebApi and AutomationExample.WebApp projects to successfully run the examples.
+* (Optional) PowerShell version >= 7.2.1
 
 ## Build and Run Projects
 

@@ -9,7 +9,7 @@ using NUnit.Framework;
 namespace AutomationExample.Tests
 {
     /// <summary>
-    ///     This is intended to test web or restful apis.
+    /// This is intended to test web or restful apis.
     /// </summary>
     public class BaseFramework
     {
@@ -17,24 +17,28 @@ namespace AutomationExample.Tests
         private static readonly ILog _logger = LogManager.GetLogger(typeof(BaseFramework));
 
         /// <summary>
-        ///     A Collection of various database connection strings
+        /// A Collection of various database connection strings
         /// </summary>
-        public static Dictionary<string, string> ConnectionStrings { get; set; } = new();
+        public static Dictionary<string, string> ConnectionStrings { get; set; } = new Dictionary<string, string>();
 
         /// <summary>
-        ///     This value could be stored in a common shared configuration quick access class
+        /// This value could be stored in a common shared configuration quick access class
         /// </summary>
         public string BaseRoute { get; set; } = string.Empty;
 
         /// <summary>
-        ///     This value could be stored in a common shared configuration quick access class
+        /// This value could be stored in a common shared configuration quick access class
         /// </summary>
         public string BaseUrl { get; set; } = string.Empty;
+
+        public BaseFramework()
+        {
+        }
 
         #region Base Test Framework startup and teardown methods
 
         /// <summary>
-        ///     Used to setup session test state. This will typically only be run once per test fixture.
+        /// Used to setup session test state. This will typically only be run once per test fixture.
         /// </summary>
         [OneTimeSetUp]
         public virtual void OneTimeSetUp()
@@ -44,7 +48,10 @@ namespace AutomationExample.Tests
 
             _logger.DebugFormat($"'{GetType().Name}.{nameof(OneTimeSetUp)}' called");
 
-            if (InitFramework.Configuration == null) throw new NoNullAllowedException($"{nameof(InitFramework.Configuration)} cannot be null");
+            if (InitFramework.Configuration == null)
+            {
+                throw new NoNullAllowedException($"{nameof(InitFramework.Configuration)} cannot be null");
+            }
 
             BaseUrl = InitFramework.Configuration.GetSection("AppSettings")["BaseUrl"];
             BaseRoute = InitFramework.Configuration.GetSection("AppSettings")["BaseRoute"];
@@ -54,13 +61,17 @@ namespace AutomationExample.Tests
                 .GetSection("ConnectionStrings").AsEnumerable();
 
             foreach (KeyValuePair<string, string> dbConnectionStr in rawStringsList)
+            {
                 if (dbConnectionStr.Key != "ConnectionStrings" && !ConnectionStrings.ContainsKey(dbConnectionStr.Key.Split(":")[1]))
+                {
                     // Removing the first part keyword "ConnectionStrings"
                     ConnectionStrings.Add(dbConnectionStr.Key.Split(":")[1], dbConnectionStr.Value);
+                }
+            }
         }
 
         /// <summary>
-        ///     Used to tear down session test state. This will typically only be run once per test fixture.
+        /// Used to tear down session test state. This will typically only be run once per test fixture.
         /// </summary>
         [OneTimeTearDown]
         public virtual void OneTimeTearDown()
@@ -69,7 +80,7 @@ namespace AutomationExample.Tests
         }
 
         /// <summary>
-        ///     Used to setup a test state for each test. This will run in between every test executed.
+        /// Used to setup a test state for each test. This will run in between every test executed.
         /// </summary>
         [SetUp]
         public virtual void SetUp()
@@ -78,7 +89,7 @@ namespace AutomationExample.Tests
         }
 
         /// <summary>
-        ///     Used to tear down test state for each test. This will run in between every test executed.
+        /// Used to tear down test state for each test. This will run in between every test executed.
         /// </summary>
         [TearDown]
         public virtual void TearDown()
@@ -93,7 +104,6 @@ namespace AutomationExample.Tests
 
             return Path.Combine(basePath.ToArray()).Replace('\\', '/');
         }
-
         #endregion
     }
 }

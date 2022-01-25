@@ -8,6 +8,10 @@ namespace AutomationExample.Tests.Api
         // Setup the local class log4net logger
         private static readonly ILog _logger = LogManager.GetLogger(typeof(BaseApi));
 
+        public BaseApi()
+        {
+        }
+
         [OneTimeSetUp]
         public override void OneTimeSetUp()
         {

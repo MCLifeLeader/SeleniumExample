@@ -1,4 +1,4 @@
-# Setup dotnet test run argument
+#Setup dotnet test run argument
 [string] $loggerArgument = '\"trx;logfilename=Test_Results.' + (Get-Date).ToString("yyyyMMdd.HHmmss") + '.trx\"'
 
 # Run the automated tests
